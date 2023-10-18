@@ -1,16 +1,18 @@
 <template>
   <div class="Category">
-    <h3>Capture the flag</h3>
-
-
-    <img src="@/assets/flag.png" alt="flag">
+    <h3>{{ category }}</h3>
+    <img :src="require(`@/assets/${image}`)" alt="category image" />
   </div>
 
 </template>
 
 <script>
 export default {
-  name: "CategoryCard"
+  name: "CategoryCard",
+  props: {
+    category: String,
+    image: String,
+  },
 }
 </script>
 

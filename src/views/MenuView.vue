@@ -3,9 +3,9 @@
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
     <div class="Menu">
-      <CategoryCard />
-      <CategoryCard />
-      <CategoryCard />
+      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
+      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
+      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
 
     </div>
 
