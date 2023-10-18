@@ -1,4 +1,3 @@
-
 <template>
   <div id="HomePage">
     <img src="../assets/background_mobile.png" alt="Plane" class="plane_mobile">
@@ -44,7 +43,6 @@ export default {
   }
 
 
-
   h1 {
     font-weight: normal;
     margin: 0;
@@ -56,7 +54,7 @@ export default {
     bottom:0;
     left: 50%;
     transform: translate(-50%,0);
-    display:flex;
+    display: flex;
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
@@ -69,7 +67,6 @@ export default {
     font-size: 35px;
     letter-spacing: 7.5px;
     font-weight: 400;
-
   }
 
   .plane{
