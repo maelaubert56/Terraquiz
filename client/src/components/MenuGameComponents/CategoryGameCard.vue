@@ -1,6 +1,6 @@
 <template>
   <div class="Category">
-    <h3>{{ category }}</h3>
+    <h3>{{ game }}</h3>
     <div id="Progress">
       <div class="load-bar-back">
         <div class="load-bar" :style="{width: score + '%'}">
@@ -8,16 +8,16 @@
         </div>
       </div>
     </div>
-    <img :src="require(`@/assets/${image}`)" alt="category image" />
+    <img :src="require(`@/assets/${image}`)" alt="game image" />
   </div>
 
 </template>
 
 <script>
 export default {
-  name: "CategoryCard",
+  name: "CategoryGameCard",
   props: {
-    category: String,
+    game: String,
     image: String,
     score: Number,
   },

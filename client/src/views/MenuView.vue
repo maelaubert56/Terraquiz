@@ -1,5 +1,5 @@
 <template>
-  <div id="MenuPage">
+  <div id="Page">
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
     <div class="Menu">
@@ -52,13 +52,13 @@ export default {
 
 <style scoped>
 
-#MenuPage{
+#Page{
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #48466D;
   color:white;
   font-family: "Concert One", cursive;
