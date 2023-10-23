@@ -1,11 +1,11 @@
 <template>
   <form class="not_connected"  v-if="!isConnected && loginForm" @submit.prevent="login">
     <div class="field_div">
-      <input type="text" placeholder="Username" class="name" v-model="username" required @input="checkInput($event.target)">
+      <input type="text" placeholder="Username" class="name" v-model="username_form" required @input="checkInput($event.target)">
     </div>
     <!-- for the password, the characters should be hidden -->
     <div class="field_div">
-      <input type="password" placeholder="Password" class="password" required v-model="password" @input="checkInput($event.target)">
+      <input type="password" placeholder="Password" class="password" required v-model="password_form" @input="checkInput($event.target)">
       <img src="@/assets/eye_close.png" alt="eye" class="eye" @click="showPassword($event.target)">
     </div>
     <input type="submit" value="Login" class="play">
@@ -14,11 +14,11 @@
   </form>
   <form class="not_connected"  v-if="!isConnected && !loginForm" @submit.prevent="register">
     <div class="field_div">
-      <input type="text" placeholder="Username" class="name" v-model="username" required @input="checkInput($event.target)">
+      <input type="text" placeholder="Username" class="name" v-model="username_form" required @input="checkInput($event.target)">
     </div>
     <!-- for the password, the characters should be hidden -->
     <div class="field_div">
-      <input type="password" placeholder="Password" class="password" required v-model="password" @input="checkInput($event.target)">
+      <input type="password" placeholder="Password" class="password" required v-model="password_form" @input="checkInput($event.target)">
       <img src="@/assets/eye_close.png" alt="eye" class="eye" @click="showPassword($event.target)">
     </div>
     <input type="submit" value="Register" class="play">
@@ -28,8 +28,8 @@
 
   <!-- if connected -->
   <form class="connected"  v-if="isConnected" @submit.prevent="play">
-    <img src="/assets/profile_pictures/3D_avatars_pack/Betty.svg" alt="profile picture" class="profile_picture">
-    <span class="username">geraldine54</span>
+    <img :src="'/assets/profile_pictures/3D_avatars_pack/' + pp_connected + '.svg'" alt="profile picture" class="profile_picture">
+    <span class="username">{{username_connected}}</span>
     <input type="submit" value="Play" class="play">
   </form>
 </template>
@@ -43,13 +43,21 @@ export default {
   name: 'MenuPage',
   data() {
     return {
-      username: '',
-      password: '',
+      username_form: '',
+      password_form: '',
       loginForm: true
     };
   },
   props: {
     isConnected: Boolean
+  },
+  beforeMount() {
+    if (this.isConnected) {
+      //get the user id in the session
+      this.session = JSON.parse(localStorage.getItem("session"));
+      let username_connected = this.session.user_username;
+      let pp_connected = this.session.user_pp;
+    }
   },
   methods: {
     checkInput(target) {
@@ -74,8 +82,8 @@ export default {
       }
     },
     login() {
-      let username = this.username.toLowerCase();
-      let password= this.password;
+      let username = this.username_form.toLowerCase();
+      let password= this.password_form;
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/${username}`).then((response) => {
 
         if (response.data.length !== 0) {
@@ -100,8 +108,8 @@ export default {
       this.loginForm = !this.loginForm;
     },
     register() {
-      let username = this.username.toLowerCase();
-      let password = this.password;
+      let username = this.username_form.toLowerCase();
+      let password = this.password_form;
       let hashedPassword = bcrypt.hashSync(password, salt);
       axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/create`,JSON.stringify(
         {

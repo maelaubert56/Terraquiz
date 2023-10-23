@@ -1,6 +1,6 @@
 <template>
   <div id="Page">
-    <img class="logo" :src="LogoSmall" alt="logo"/>
+    <img class="logo" :src="LogoSmall" alt="logo" @click="() => $router.push('/')" />
 
     <div class="Menu" v-if="categories && categories.length > 0">
       <CategoryCard
@@ -73,6 +73,7 @@ export default {
 .logo{
   height: 100px;
   margin: 20px auto;
+  cursor: pointer;
 }
 
 .Menu{
