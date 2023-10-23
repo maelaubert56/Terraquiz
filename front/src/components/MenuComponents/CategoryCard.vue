@@ -1,6 +1,12 @@
 <template>
   <div class="Category">
     <h3>{{ category }}</h3>
+    <div class="progress">
+      <h3 id="#score">50%</h3>
+      <div class="progress-bar">
+        <div class="progress-bar-back"></div>
+      </div>
+    </div>
     <img :src="require(`@/assets/${image}`)" alt="category image" />
   </div>
 
