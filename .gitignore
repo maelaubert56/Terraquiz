@@ -1,9 +1,5 @@
-/back/node_modules/
-/front/node_modules/
-
-
-
 .DS_Store
+**/node_modules
 /dist
 
 
