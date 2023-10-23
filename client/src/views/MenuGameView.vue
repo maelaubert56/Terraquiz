@@ -1,16 +1,20 @@
 <template>
-  <div id="MenuPage">
+  <div id="Page">
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
-    <h2 @click.prevent="redirectToMenu()">Capture the flag</h2>
+    <div class="title">
+      <img class="arrow" src="../assets/arrow.png" alt="arrow"/>
+      <h2 @click.prevent="redirectToMenu()">Capture the flag</h2>
+    </div>
 
     <div class="Menu">
-      <CategoryCard
-          v-for="(category, index) in categories"
+      <CategoryGameCard
+          v-for="(game, index) in games"
           :key="index"
-          :category="category.name"
-          :image="category.image"
-          :score="category.score"
+          :game="game.name"
+          :image="game.image"
+          :score="game.score"
+          @click.prevent="goToQuiz()"
       />
 
     </div>
@@ -21,7 +25,7 @@
 
 <script>
 
-import CategoryCard from "@/components/MenuComponents/CategoryCard.vue";
+import CategoryGameCard from "@/components/MenuGameComponents/CategoryGameCard.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 
 export default {
@@ -29,15 +33,25 @@ export default {
   data(){
     return{
       LogoSmall: require("@/assets/logo_terraquiz.svg"),
+      games: [
+        { name: "Europe - Easy", image: "flag.png", score: "50" },
+        { name: "Asia - Easy", image: "flag.png", score: "60" },
+        { name: "Africa - Easy", image: "flag.png", score: "70" },
+        { name: "Europe - Medium", image: "flag.png", score: "80" },
+        { name: "Asia - Medium", image: "flag.png", score: "30" },
+      ],
     }
   },
   components: {
-    CategoryCard,
+    CategoryGameCard,
     FooterComponent
   },
   methods: {
     redirectToMenu() {
       this.$router.push("/menu");
+    },
+    goToQuiz() {
+      this.$router.push("/quiz");
     }
   },
 }
@@ -46,13 +60,13 @@ export default {
 <style scoped>
 
 
-#MenuPage{
+#Page{
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  height: 100vh;
+  min-height: 100vh;
   background-color: #48466D;
   color:white;
   font-family: "Concert One", cursive;
@@ -69,6 +83,18 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+}
+
+.title{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.arrow{
+  height: 50px;
 }
 
 </style>
