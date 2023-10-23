@@ -19,19 +19,17 @@ TerraQuiz is built with:
 [![Babel](https://img.shields.io/badge/-Babel-F9DC3E?style=flat-square&logo=babel&logoColor=white)](https://babeljs.io/)
 [![Node.js](https://img.shields.io/badge/-Node.js-339933?style=flat-square&logo=node.js&logoColor=white)](https://nodejs.org/en/)
 [![Express.js](https://img.shields.io/badge/-Express.js-000000?style=flat-square&logo=express&logoColor=white)](https://expressjs.com/)
-[![MongoDB](https://img.shields.io/badge/-MongoDB-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com/)
 [![Open Trivia Database](https://img.shields.io/badge/-Open%20Trivia%20Database-FF8200?style=flat-square&logo=opentdb&logoColor=white)](https://opentdb.com/)
 
 
 ## Project setup
 ```
 npm install
+cd client && npm install
 ```
-### Compiles and hot-reloads for development
+### Compilation
 ```
-npm run serve
-```
-### Compiles and minifies for production
-```
-npm run build
+npm run client && npm run server
+OR
+npm run dev
 ```
