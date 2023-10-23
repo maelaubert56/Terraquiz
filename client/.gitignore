@@ -1,9 +1,5 @@
-/back/node_modules/
-/front/node_modules/
-
-
-
 .DS_Store
+node_modules
 /dist
 
 
@@ -25,4 +21,3 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
-/node_modules/
