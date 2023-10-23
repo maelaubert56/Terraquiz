@@ -10,7 +10,8 @@
 
     <div class="QuizArea">
       <!-- parameter image france_flag in QuizArea  -->
-      <QuizArea :image="'france_flag.png'" />
+      <!-- <QuizArea :image="'france_flag.png'" /> -->
+      <ResultsArea />
     </div>
 
 
@@ -22,6 +23,7 @@
 
 import FooterComponent from "@/components/FooterComponent.vue";
 import QuizArea from "@/components/QuizComponents/QuizArea.vue";
+import ResultsArea from "@/components/QuizComponents/ResultsArea.vue";
 export default {
   name: "QuizView",
   data(){
@@ -31,7 +33,8 @@ export default {
   },
   components: {
     FooterComponent,
-    QuizArea
+    QuizArea,
+    ResultsArea
   },
   methods: {
     goToGameMenu() {
