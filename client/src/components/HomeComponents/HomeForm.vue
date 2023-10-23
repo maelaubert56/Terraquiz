@@ -1,37 +1,57 @@
 <template>
-  <form class="not_connected"  v-if="!isConnected">
+  <form class="not_connected"  v-if="!isConnected && loginForm" @submit.prevent="login">
     <div class="field_div">
-      <input type="text" placeholder="Username" class="name" required @input="checkInput($event.target)">
+      <input type="text" placeholder="Username" class="name" v-model="username" required @input="checkInput($event.target)">
     </div>
     <!-- for the password, the characters should be hidden -->
     <div class="field_div">
-      <input type="password" placeholder="Password" class="password" required @input="checkInput($event.target)">
+      <input type="password" placeholder="Password" class="password" required v-model="password" @input="checkInput($event.target)">
       <img src="@/assets/eye_close.png" alt="eye" class="eye" @click="showPassword($event.target)">
     </div>
-    <input type="submit" value="Play" class="play" @click.prevent="redirectToMenu">
-    <a>Register</a>
+    <input type="submit" value="Login" class="play">
+    <a @click="switchForm" class="register">Register</a>
     <p class="error_message">No spaces allowed</p>
   </form>
+  <form class="not_connected"  v-if="!isConnected && !loginForm" @submit.prevent="register">
+    <div class="field_div">
+      <input type="text" placeholder="Username" class="name" v-model="username" required @input="checkInput($event.target)">
+    </div>
+    <!-- for the password, the characters should be hidden -->
+    <div class="field_div">
+      <input type="password" placeholder="Password" class="password" required v-model="password" @input="checkInput($event.target)">
+      <img src="@/assets/eye_close.png" alt="eye" class="eye" @click="showPassword($event.target)">
+    </div>
+    <input type="submit" value="Register" class="play">
+    <a @click="switchForm" class="register">Login</a>
+    <p class="error_message">No spaces allowed</p>
+  </form>
+
   <!-- if connected -->
-  <form class="connected"  v-if="isConnected">
+  <form class="connected"  v-if="isConnected" @submit.prevent="play">
     <img src="/assets/profile_pictures/3D_avatars_pack/Betty.svg" alt="profile picture" class="profile_picture">
     <span class="username">geraldine54</span>
-    <input type="submit" value="Play" class="play" @click.prevent="redirectToMenu">
+    <input type="submit" value="Play" class="play">
   </form>
 </template>
 
 <script>
+import axios from 'axios';
+import bcrypt from 'bcryptjs';
+const salt = bcrypt.genSaltSync(10);
+
 export default {
   name: 'MenuPage',
+  data() {
+    return {
+      username: '',
+      password: '',
+      loginForm: true
+    };
+  },
   props: {
     isConnected: Boolean
   },
   methods: {
-    redirectToMenu() {
-      // Redirigez vers la page du menu
-      this.$router.push('/menu');
-
-    },
     checkInput(target) {
       // Vérifiez que les champs du formulaire ne contiennent pas d'espace
       if (target.value.includes(' ')) {
@@ -52,6 +72,60 @@ export default {
         target.previousElementSibling.type = 'password';
         target.src = require('@/assets/eye_close.png');
       }
+    },
+    login() {
+      let username = this.username.toLowerCase();
+      let password= this.password;
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/${username}`).then((response) => {
+
+        if (response.data.length !== 0) {
+          let hash = response.data[0].user_password;
+          console.log(hash)
+          console.log(password)
+          if (bcrypt.compareSync(password, hash)) {
+            localStorage.setItem('session', JSON.stringify(response.data[0]));
+            this.$router.push('/');
+            window.location.reload();
+          } else {
+            alert('Wrong password');
+          }
+        } else {
+          alert('Wrong username');
+        }
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    switchForm() {
+      this.loginForm = !this.loginForm;
+    },
+    register() {
+      let username = this.username.toLowerCase();
+      let password = this.password;
+      let hashedPassword = bcrypt.hashSync(password, salt);
+      axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/create`,JSON.stringify(
+        {
+          username: username,
+          password: hashedPassword,
+          avatar: 1,
+          privilege: 0
+        }), {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+          }
+      ).then((response) => {
+        console.log(response);
+        this.loginForm = true;
+        localStorage.setItem('session', JSON.stringify(response.data[0]));
+        this.$router.push('/');
+        window.location.reload();
+      }).catch((error) => {
+        console.log(error);
+      });
+    },
+    play() {
+      this.$router.push('/menu');
     }
   }
 }
@@ -113,17 +187,17 @@ form input[type="submit"]{
 }
 
 form input[type="text"]:valid, form input[type="password"]:valid{
-  box-shadow: 0px 0px 15px 0px #46cf61;
+  box-shadow: 0 0 15px 0 #46cf61;
   transition: 0.2s;
 }
 
 form .invalid{
-  box-shadow: 0px 0px 15px 0px #cf4646 !important;
+  box-shadow: 0 0 15px 0 #cf4646 !important;
   transition: 0.2s;
 }
 
 form input[type="submit"]:hover{
-  box-shadow: 0px 0px 10px 0px #46CDCF;
+  box-shadow: 0 0 10px 0 #46CDCF;
   transition: 0.2s;
 }
 

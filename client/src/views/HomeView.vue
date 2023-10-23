@@ -19,14 +19,17 @@ export default {
     name: 'HomeView',
     data() {
       return {
-        isUserConnected: true // Mettez ici l'état de connexion de l'utilisateur, true s'il est connecté, false sinon
+
       };
     },
     components: {
       HomeForm,
       FooterComponent
+    },
+    beforeCreate() {
+      this.isUserConnected = localStorage.getItem("session") !== null;
     }
-  };
+};
 
 
 </script>
