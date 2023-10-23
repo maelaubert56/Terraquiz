@@ -1,0 +1,20 @@
+{
+  "name": "terraquiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "client": "cd client && npm run serve",
+    "server": "cd server && node app.js",
+    "dev": "concurrently --kill-others \"npm run server\" \"npm run client\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
