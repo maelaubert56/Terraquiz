@@ -3,9 +3,13 @@
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
     <div class="Menu">
-      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
-      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
-      <CategoryCard :category="'Capture the Flag'" :image="'flag.png'"/>
+      <CategoryCard
+          v-for="(category, index) in categories"
+          :key="index"
+          :category="category.name"
+          :image="category.image"
+          :score="category.score"
+      />
 
     </div>
 
@@ -23,6 +27,13 @@ export default {
   data() {
     return {
       LogoSmall: require("@/assets/logo_terraquiz.svg"),
+      categories: [
+        { name: "Capture the Flag", image: "flag.png", score: "50" },
+        { name: "What did you said ?", image: "languages.png", score: "60" },
+        { name: "Yet Another Category", image: "flag.png", score: "70" },
+        { name: "One More Category", image: "flag.png", score: "80" },
+        { name: "Last Category", image: "flag.png", score: "90" },
+      ],
     };
   },
   components: {
@@ -37,7 +48,10 @@ export default {
 <style scoped>
 
 #MenuPage{
-  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
   width: 100%;
   height: 100vh;
   background-color: #48466D;
@@ -46,13 +60,8 @@ export default {
 }
 
 .logo{
-  /*centered on top of page*/
-  position: relative;
-  left: 50%;
-  transform: translate(-50%,0);
   height: 100px;
   margin: 20px auto;
-
 }
 
 .Menu{

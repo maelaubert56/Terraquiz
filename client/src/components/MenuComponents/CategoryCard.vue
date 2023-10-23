@@ -1,10 +1,11 @@
 <template>
   <div class="Category">
     <h3>{{ category }}</h3>
-    <div class="progress">
-      <h3 id="#score">50%</h3>
-      <div class="progress-bar">
-        <div class="progress-bar-back"></div>
+    <div id="Progress">
+      <div class="load-bar-back">
+        <div class="load-bar" :style="{width: score + '%'}">
+          <h3 class="score">{{ score }}%</h3>
+        </div>
       </div>
     </div>
     <img :src="require(`@/assets/${image}`)" alt="category image" />
@@ -18,6 +19,7 @@ export default {
   props: {
     category: String,
     image: String,
+    score: Number,
   },
 }
 </script>
@@ -52,5 +54,41 @@ h3{
   line-height: normal;
 }
 
+#Progress{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.load-bar-back{
+  position: relative;
+  width: 300px;
+  height: 20px;
+  padding-right: 0;
+  align-items: center;
+  border-radius: 10px;
+  background: #3D84A8;
+}
+
+.load-bar{
+  position: absolute;
+  height: 20px;
+  border-radius: 10px;
+  background: #46CDFF;
+  transition: width 0.5s ease-in-out;
+}
+
+.score{
+  position: absolute;
+  right:0;
+  top:0;
+  transform: translate(50%,-100%);
+  color: #FFF;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
 
 </style>
