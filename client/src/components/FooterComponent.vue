@@ -22,9 +22,9 @@ export default {
       }
     },
     logout() {
+
       localStorage.removeItem('session');
       this.$router.push('/');
-      window.location.reload();
     }
   }
 }

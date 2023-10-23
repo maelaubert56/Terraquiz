@@ -8,7 +8,7 @@
         </div>
       </div>
     </div>
-    <img :src="require(`@/assets/${image}`)" alt="category image" />
+    <img :src="require(`@/assets/categories_images/${image}.png`)" alt="category image" />
   </div>
 
 </template>
@@ -38,6 +38,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  cursor:pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.Category:hover{
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
 }
 
 img{

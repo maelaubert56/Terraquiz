@@ -2,13 +2,13 @@
   <div id="MenuPage">
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
-    <div class="Menu">
+    <div class="Menu" v-if="categories && categories.length > 0">
       <CategoryCard
           v-for="(category, index) in categories"
           :key="index"
-          :category="category.name"
-          :image="category.image"
-          :score="category.score"
+          :category="category.category_name"
+          :image="category.category_image"
+          :score="parseInt(category.progress_value)"
           @click.prevent="goToGameMenu()"
       />
     </div>
@@ -21,24 +21,30 @@
 
 import CategoryCard from "@/components/MenuComponents/CategoryCard.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import axios from 'axios';
 
 export default {
   name: 'MenuPage',
   data() {
     return {
-      LogoSmall: require("@/assets/logo_terraquiz.svg"),
-      categories: [
-        { name: "Capture the Flag", image: "flag.png", score: "50" },
-        { name: "What did you said ?", image: "languages.png", score: "60" },
-        { name: "Yet Another Category", image: "flag.png", score: "70" },
-        { name: "One More Category", image: "flag.png", score: "80" },
-        { name: "Last Category", image: "flag.png", score: "90" },
-      ],
+      categories: [],
+      LogoSmall: require("@/assets/logo_terraquiz.svg")
     };
   },
   components: {
     CategoryCard,
     FooterComponent
+  },
+  beforeMount() {
+    //get the user id in the session
+    this.session = JSON.parse(localStorage.getItem("session"));
+    let user_id = this.session.user_id;
+    //get all the cat data from the user id
+    axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/${user_id}`).then((response) => {
+      this.categories = response.data;
+    });
+
+
   },
   methods: {
     goToGameMenu() {
