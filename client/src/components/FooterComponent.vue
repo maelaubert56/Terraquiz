@@ -2,7 +2,7 @@
   <footer>
     <img src="@/assets/gear.svg" alt="settings" v-if="isConnected" @click="redirect(0)">
     <img src="@/assets/github.png" alt="github" @click="redirect(1)">
-    <img src="@/assets/log-out.svg" alt="log-out" v-if="isConnected" @click="redirect(2)">
+    <img src="@/assets/log-out.svg" alt="log-out" v-if="isConnected" @click="logout()">
   </footer>
 </template>
 
@@ -19,9 +19,12 @@ export default {
         this.$router.push('/settings');
       } else if (target === 1) {
         window.open('https://github.com/maelaubert56/terraquiz", "_blank');
-      } else if (target === 2) {
-        this.$router.push('/');
       }
+    },
+    logout() {
+      localStorage.removeItem('session');
+      this.$router.push('/');
+      window.location.reload();
     }
   }
 }
