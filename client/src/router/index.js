@@ -12,6 +12,11 @@ const routes = [
     component: () => import('../views/MenuView.vue')
   },
   {
+    path: '/menu-game',
+    name: 'menu-game',
+    component: () => import('../views/MenuGameView.vue')
+  },
+  {
     path: '/:pathMatch(.*)*',
     name: 'not-found',
     component: () => import('../views/NotFoundView.vue')

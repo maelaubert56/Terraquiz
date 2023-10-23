@@ -2,6 +2,8 @@
   <div id="MenuPage">
     <img class="logo" :src="LogoSmall" alt="logo"/>
 
+    <h2 @click.prevent="redirectToMenu()">Capture the flag</h2>
+
     <div class="Menu">
       <CategoryCard
           v-for="(category, index) in categories"
@@ -9,8 +11,8 @@
           :category="category.name"
           :image="category.image"
           :score="category.score"
-          @click.prevent="goToGameMenu()"
       />
+
     </div>
 
     <FooterComponent :isConnected="true" />
@@ -23,34 +25,26 @@ import CategoryCard from "@/components/MenuComponents/CategoryCard.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 
 export default {
-  name: 'MenuPage',
-  data() {
-    return {
+  name: "MenuGames",
+  data(){
+    return{
       LogoSmall: require("@/assets/logo_terraquiz.svg"),
-      categories: [
-        { name: "Capture the Flag", image: "flag.png", score: "50" },
-        { name: "What did you said ?", image: "languages.png", score: "60" },
-        { name: "Yet Another Category", image: "flag.png", score: "70" },
-        { name: "One More Category", image: "flag.png", score: "80" },
-        { name: "Last Category", image: "flag.png", score: "90" },
-      ],
-    };
+    }
   },
   components: {
     CategoryCard,
     FooterComponent
   },
   methods: {
-    goToGameMenu() {
-      this.$router.push("/menu-game");
+    redirectToMenu() {
+      this.$router.push("/menu");
     }
   },
-};
-
+}
 </script>
 
-
 <style scoped>
+
 
 #MenuPage{
   display: flex;
@@ -76,6 +70,5 @@ export default {
   align-items: center;
   gap: 20px;
 }
-
 
 </style>
