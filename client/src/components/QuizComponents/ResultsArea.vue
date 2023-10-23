@@ -1,8 +1,6 @@
 <template>
   <div class="ResultsArea">
-    <div class="text">
-      <p>Results</p>
-    </div>
+    <div class="text"> <p>Results</p> </div>
 
     <div id="Progress">
       <div class="load-bar-back">
@@ -12,8 +10,10 @@
       </div>
     </div>
 
+    <div class="text"> <p>{{index}} / {{total}} {{msg}}</p> </div>
+
     <div class="next_area">
-      <button class="play_again">Play Again/button>
+      <button class="play_again">Play Again</button>
     </div>
 
   </div>
@@ -21,7 +21,13 @@
 
 <script>
 export default {
-  name: "ResultsArea"
+  name: "ResultsArea",
+  props: {
+    score: Number,
+    index: Number,
+    total: Number,
+    msg: String
+  }
 }
 </script>
 
@@ -30,8 +36,8 @@ export default {
 .ResultsArea{
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  gap: 30px;
 
   background-color: #5E5C89;
   border-radius: 20px;
@@ -61,7 +67,7 @@ export default {
   position: absolute;
   height: 20px;
   border-radius: 10px;
-  background: #46CDFF;
+  background: #ABEDD8;
   transition: width 0.5s ease-in-out;
 }
 
@@ -69,8 +75,8 @@ export default {
   position: absolute;
   right:0;
   top:0;
-  transform: translate(50%,-100%);
-  color: #FFF;
+  transform: translate(50%,-200%);
+  color: #ABEDD8;
   font-size: 20px;
   font-style: normal;
   font-weight: 400;

@@ -11,7 +11,7 @@
     <div class="QuizArea">
       <!-- parameter image france_flag in QuizArea  -->
       <!-- <QuizArea :image="'france_flag.png'" /> -->
-      <ResultsArea />
+      <ResultsArea :score="65" :index="14" :total="18" :msg="'Great !'"/>
     </div>
 
 
@@ -33,7 +33,7 @@ export default {
   },
   components: {
     FooterComponent,
-    QuizArea,
+    //QuizArea,
     ResultsArea
   },
   methods: {
