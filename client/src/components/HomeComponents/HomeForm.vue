@@ -45,7 +45,7 @@ export default {
     return {
       username_form: '',
       password_form: '',
-      loginForm: true
+      loginForm: true,
     };
   },
   props: {
@@ -55,8 +55,8 @@ export default {
     if (this.isConnected) {
       //get the user id in the session
       this.session = JSON.parse(localStorage.getItem("session"));
-      let username_connected = this.session.user_username;
-      let pp_connected = this.session.user_pp;
+      this.username_connected = this.session.user_username;
+      this.pp_connected = this.session.user_pp;
     }
   },
   methods: {
