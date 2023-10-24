@@ -1,4 +1,5 @@
 <template>
+  <!-- login form -->
   <form class="not_connected"  v-if="!isConnected && loginForm" @submit.prevent="login">
     <div class="field_div">
       <input type="text" placeholder="Username" class="name" v-model="username_form" required @input="checkInput($event.target)">
@@ -12,7 +13,14 @@
     <a @click="switchForm" class="register">Register</a>
     <p class="error_message">No spaces allowed</p>
   </form>
+
+  <!-- register form -->
   <form class="not_connected"  v-if="!isConnected && !loginForm" @submit.prevent="register">
+    <div v-if="pp_selected" class="profile_picture_div" @click="$emit('openModalEvent')">
+      <img :src="'/assets/profile_pictures/3D_avatars_pack/' + pp_selected + '.svg'" alt="profile picture" class="profile_picture">
+      <img src="@/assets/edit.svg" alt="edit" class="edit">
+    </div>
+    <div v-else @click="$emit('openModalEvent')" class="open-modal-button">Open Modal</div>
     <div class="field_div">
       <input type="text" placeholder="Username" class="name" v-model="username_form" required @input="checkInput($event.target)">
     </div>
@@ -39,17 +47,22 @@ import axios from 'axios';
 import bcrypt from 'bcryptjs';
 const salt = bcrypt.genSaltSync(10);
 
+
+
+
 export default {
-  name: 'MenuPage',
+  name: 'HomeForm',
   data() {
     return {
       username_form: '',
       password_form: '',
-      loginForm: true,
+      loginForm: true
     };
   },
+  emits: ['openModalEvent'],
   props: {
-    isConnected: Boolean
+    isConnected: Boolean,
+    pp_selected: Number
   },
   beforeMount() {
     if (this.isConnected) {
@@ -147,6 +160,7 @@ form{
   justify-content: space-around;
   align-items: center;
   gap:10px;
+  width: 100%;
 }
 
 
@@ -260,5 +274,44 @@ form a:hover{
   height: 70px;
   border-radius: 50%;
   margin-top: 10px;
+}
+
+.profile_picture_div{
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.edit{
+  display:none;
+  position: absolute;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%,-50%);
+  transition: 0.5s;
+  width: 20px;
+  height: 20px;
+}
+
+.profile_picture_div:hover .profile_picture{
+  opacity: 0.5;
+  transition: 0.2s;
+}
+
+.profile_picture_div:hover .edit{
+  display: block;
+  transition: 0.2s;
+}
+
+
+
+
+
+.avatar_choose img{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: 0.5s;
 }
 </style>
