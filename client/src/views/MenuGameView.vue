@@ -54,6 +54,11 @@ export default {
       this.$router.push("/quiz");
     }
   },
+  beforeMount() {
+    if (!localStorage.getItem("session")) {
+      this.$router.push("/");
+    }
+  }
 }
 </script>
 

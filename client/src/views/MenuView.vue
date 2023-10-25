@@ -36,13 +36,18 @@ export default {
     FooterComponent
   },
   beforeMount() {
-    //get the user id in the session
-    this.session = JSON.parse(localStorage.getItem("session"));
-    let user_id = this.session.user_id;
-    //get all the cat data from the user id
-    axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/${user_id}`).then((response) => {
-      this.categories = response.data;
-    });
+    //check if there is a session
+    if (!localStorage.getItem("session")) {
+      this.$router.push("/");
+    }else {
+      //get the user id in the session
+      this.session = JSON.parse(localStorage.getItem("session"));
+      let user_id = this.session.user_id;
+      //get all the cat data from the user id
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/${user_id}`).then((response) => {
+        this.categories = response.data;
+      });
+    }
 
 
   },

@@ -40,6 +40,11 @@ export default {
     goToGameMenu() {
       this.$router.push("/menu-game");
     }
+  },
+  beforeMount() {
+    if (!localStorage.getItem("session")) {
+      this.$router.push("/");
+    }
   }
 }
 
