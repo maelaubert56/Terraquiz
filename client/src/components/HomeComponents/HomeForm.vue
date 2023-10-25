@@ -20,7 +20,7 @@
       <img :src="'/assets/profile_pictures/3D_avatars_pack/' + pp_selected + '.svg'" alt="profile picture" class="profile_picture">
       <img src="@/assets/edit.svg" alt="edit" class="edit">
     </div>
-    <div v-else @click="$emit('openModalEvent')" class="open-modal-button">Open Modal</div>
+    <div v-else @click="$emit('openModalEvent')" class="open-modal-button">Choose Avatar</div>
     <div class="field_div">
       <input type="text" placeholder="Username" class="name" v-model="username_form" required @input="checkInput($event.target)">
     </div>
@@ -124,26 +124,36 @@ export default {
       let username = this.username_form.toLowerCase();
       let password = this.password_form;
       let hashedPassword = bcrypt.hashSync(password, salt);
-      axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/create`,JSON.stringify(
-        {
-          username: username,
-          password: hashedPassword,
-          avatar: 1,
-          privilege: 0
-        }), {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-          }
-      ).then((response) => {
-        console.log(response);
-        this.loginForm = true;
-        localStorage.setItem('session', JSON.stringify(response.data[0]));
-        this.$router.push('/');
-        window.location.reload();
-      }).catch((error) => {
-        console.log(error);
-      });
+      let avatar = this.pp_selected;
+      console.log(avatar)
+      if(avatar){
+        axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/create`, JSON.stringify(
+                {
+                  username: username,
+                  password: hashedPassword,
+                  avatar: avatar,
+                  privilege: 0
+                }), {
+              headers: {
+                'Content-Type': 'application/json'
+              }
+            }
+        ).then((response) => {
+          this.loginForm = true;
+          localStorage.setItem('session', JSON.stringify({
+            username: username,
+            password: hashedPassword,
+            avatar: avatar,
+            privilege: 0
+          }));
+          this.$router.push('/');
+          window.location.reload();
+        }).catch((error) => {
+          console.log(error);
+        });
+      }else{
+        alert("Please select an avatar")
+      }
     },
     play() {
       this.$router.push('/menu');
