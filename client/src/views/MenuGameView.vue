@@ -9,12 +9,12 @@
 
     <div class="Menu">
       <CategoryGameCard
-          v-for="(game, index) in games"
+          v-for="(quiz, index) in quizzes"
           :key="index"
-          :game="game.name"
-          :image="game.image"
-          :score="game.score"
-          @click.prevent="goToQuiz()"
+          :name="quiz.quiz_name"
+          :image="quiz.quiz_image"
+          :score="parseInt(quiz.progress_value)"
+          @click.prevent="goToQuiz(quiz.quiz_id)"
       />
 
     </div>
@@ -27,36 +27,43 @@
 
 import CategoryGameCard from "@/components/MenuGameComponents/CategoryGameCard.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import axios from 'axios';
 
 export default {
   name: "MenuGames",
   data(){
     return{
       LogoSmall: require("@/assets/logo_terraquiz.svg"),
-      games: [
-        { name: "Europe - Easy", image: "flag.png", score: "50" },
-        { name: "Asia - Easy", image: "flag.png", score: "60" },
-        { name: "Africa - Easy", image: "flag.png", score: "70" },
-        { name: "Europe - Medium", image: "flag.png", score: "80" },
-        { name: "Asia - Medium", image: "flag.png", score: "30" },
-      ],
+      quizzes: [],
     }
   },
   components: {
     CategoryGameCard,
     FooterComponent
   },
+  beforeMount() {
+    //check if there is a session
+    if (!localStorage.getItem("session")) {
+      this.$router.push("/");
+    } else {
+      //get the user id in the session
+      this.session = JSON.parse(localStorage.getItem("session"));
+      let user_id = this.session.user_id;
+      let category_id = this.$route.query.cat
+      console.log(category_id)
+
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/category/${category_id}/${user_id}`).then((response) => {
+        this.quizzes = response.data;
+        console.log(this.quizzes)
+      });
+    }
+  },
   methods: {
     redirectToMenu() {
       this.$router.push("/menu");
     },
-    goToQuiz() {
+    goToQuiz(id_quiz) {
       this.$router.push("/quiz");
-    }
-  },
-  beforeMount() {
-    if (!localStorage.getItem("session")) {
-      this.$router.push("/");
     }
   }
 }

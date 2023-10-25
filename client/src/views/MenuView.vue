@@ -9,7 +9,7 @@
           :category="category.category_name"
           :image="category.category_image"
           :score="parseInt(category.progress_value)"
-          @click.prevent="goToGameMenu()"
+          @click.prevent="goToQuizzes(category.category_id)"
       />
     </div>
 
@@ -48,12 +48,10 @@ export default {
         this.categories = response.data;
       });
     }
-
-
   },
   methods: {
-    goToGameMenu() {
-      this.$router.push("/menu-game");
+    goToQuizzes(category_id) {
+      this.$router.push(`/menu-game?cat=${category_id}`);
     }
   },
 };

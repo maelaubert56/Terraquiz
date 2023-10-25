@@ -44,5 +44,11 @@ router.get("/:id_quiz/:id_user", async (req, res) => {
     return res.status(200).json(response[0][0])
 })
 
+router.get("/category/:id_category/:id_user", async (req, res) => {
+    const {id_category, id_user} = req.params
+    const response = await connection.promise().query('SELECT quiz.quiz_id, quiz.quiz_name, quiz.quiz_difficulty, quiz.quiz_image, progress.progress_value FROM quiz LEFT JOIN progress ON quiz.quiz_id = progress.quiz_id WHERE quiz.category_id = ? AND progress.user_id = ?', [id_category, id_user]);
+    return res.status(200).json(response[0])
+})
+
 module.exports = router
 
