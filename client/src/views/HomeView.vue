@@ -1,34 +1,49 @@
 <template>
+  <ChooseAvatar v-if="!isConnected && isModalVisible" :pp_selected="parseInt(pp_selected)" @chooseAvatarEvent="handleChooseAvatar" @closeModalEvent="handleCloseModal"/>
   <div id="HomePage">
     <img src="../assets/background_mobile.png" alt="Plane" class="plane_mobile">
     <img src="../assets/background_desktop.png" alt="Plane" class="plane_desktop">
     <div>
       <h2>challenge your geography skills</h2>
       <!-- if not connected -->
-      <HomeForm :isConnected="isUserConnected" />
+      <HomeForm :isConnected="isUserConnected" :pp_selected="parseInt(pp_selected)" @openModalEvent="handleOpenModal" />
       <FooterComponent :isConnected="isUserConnected" />
     </div>
   </div>
 </template>
 
 <script>
-
 import HomeForm from "@/components/HomeComponents/HomeForm.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
+import ChooseAvatar from "@/components/HomeComponents/HomeChooseAvatar.vue";
 export default {
     name: 'HomeView',
     data() {
       return {
-
+        isModalVisible: false,
+        pp_selected: null,
+        isConnected: false
       };
     },
     components: {
+      ChooseAvatar,
       HomeForm,
       FooterComponent
     },
     beforeCreate() {
       this.isUserConnected = localStorage.getItem("session") !== null;
+    },
+  methods: {
+    handleChooseAvatar(avatarId) {
+      this.pp_selected = avatarId;
+    },
+    handleCloseModal() {
+      this.isModalVisible = false;
+    },
+    handleOpenModal() {
+      this.isModalVisible = true;
     }
+  }
 };
 
 

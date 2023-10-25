@@ -24,7 +24,11 @@ export default {
     logout() {
 
       localStorage.removeItem('session');
-      this.$router.push('/');
+      if (this.$route.path === '/') {
+        window.location.reload();
+      } else {
+        this.$router.push('/');
+      }
     }
   }
 }

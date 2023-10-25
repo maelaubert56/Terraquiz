@@ -1,6 +1,6 @@
 <template>
   <div id="NotFound">
-    <img src="@/assets/logo.png" alt="logo">
+    <img src="@/assets/logo.png" alt="logo" @click="() => $router.push('/')" />
     <div>
       <h2>404 error...</h2>
       <h1>It seems you're lost</h1>
@@ -79,5 +79,6 @@ img {
   margin-right: auto;
   width: 200px;
   height: 200px;
+  cursor: pointer;
 }
 </style>

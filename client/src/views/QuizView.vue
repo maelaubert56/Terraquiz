@@ -1,6 +1,6 @@
 <template>
   <div id="Page">
-    <img class="logo" :src="LogoSmall" alt="logo"/>
+    <img class="logo" :src="LogoSmall" alt="logo" @click="() => $router.push('/')" />
 
     <div class="title">
       <img class="arrow" src="../assets/arrow.png" alt="arrow"/>
@@ -62,6 +62,7 @@ export default {
 .logo{
   height: 100px;
   margin: 20px auto;
+  cursor: pointer;
 }
 
 .title{
