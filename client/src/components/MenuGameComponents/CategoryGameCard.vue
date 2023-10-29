@@ -10,7 +10,6 @@
     </div>
     <img :src="require(`@/assets/categories_images/${image}.png`)" alt="game image" />
   </div>
-
 </template>
 
 <script>

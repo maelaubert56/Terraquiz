@@ -12,7 +12,7 @@
           v-for="(quiz, index) in quizzes"
           :key="index"
           :name="quiz.quiz_name"
-          :image="quiz.quiz_image"
+          :image="(quiz.quiz_image).toString()"
           :score="parseInt(quiz.progress_value)"
           @click.prevent="goToQuiz(quiz.quiz_id)"
       />
@@ -41,7 +41,7 @@ export default {
     CategoryGameCard,
     FooterComponent
   },
-  beforeMount() {
+  created() {
     //check if there is a session
     if (!localStorage.getItem("session")) {
       this.$router.push("/");
@@ -63,7 +63,7 @@ export default {
       this.$router.push("/menu");
     },
     goToQuiz(id_quiz) {
-      this.$router.push("/quiz");
+      this.$router.push("/quiz?cat=" + this.$route.query.cat + "&quiz=" + id_quiz);
     }
   }
 }

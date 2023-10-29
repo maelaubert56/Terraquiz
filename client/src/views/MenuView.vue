@@ -35,7 +35,7 @@ export default {
     CategoryCard,
     FooterComponent
   },
-  beforeMount() {
+  created() {
     //check if there is a session
     if (!localStorage.getItem("session")) {
       this.$router.push("/");

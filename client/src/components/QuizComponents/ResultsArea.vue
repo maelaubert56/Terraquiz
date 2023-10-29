@@ -4,16 +4,17 @@
 
     <div id="Progress">
       <div class="load-bar-back">
-        <div class="load-bar" :style="{width: score + '%'}">
-          <h3 class="score">{{ score }}%</h3>
+        <div class="load-bar" :style="{width: percentage() + '%'}">
+          <h3 class="score">{{percentage()}}%</h3>
         </div>
       </div>
     </div>
 
-    <div class="text"> <p>{{index}} / {{total}} {{msg}}</p> </div>
+    <div class="text"> <p>{{nbGoodAnswer()}} / {{nbTotal()}} {{msg()}}</p> </div>
 
     <div class="next_area">
-      <button class="play_again">Play Again</button>
+      <button class="back" @click="$emit('back')">
+        Back to Quizzes</button>
     </div>
 
   </div>
@@ -23,10 +24,24 @@
 export default {
   name: "ResultsArea",
   props: {
-    score: Number,
-    index: Number,
-    total: Number,
-    msg: String
+    score: Array
+  },
+  methods: {
+    nbGoodAnswer(){
+      return this.score.filter(x => x === 1).length;
+    },
+    nbTotal(){
+      return this.score.length;
+    },
+    percentage(){
+      return Math.round(this.nbGoodAnswer() / this.nbTotal() * 100);
+    },
+    msg(){
+      let percentage = this.percentage()
+      let message = (percentage === 100 ? "Perfect!" : percentage >= 80 ? "Great!" : percentage >= 60 ? "Good!" : percentage >= 40 ? "Not bad!" : percentage >= 20 ? "You can do better!" : "Try again!")
+      console.log(message)
+      return message
+    }
   }
 }
 </script>
@@ -84,7 +99,7 @@ export default {
 }
 
 
-.play_again{
+.back{
   width: 300px;
   height: 45px;
 
