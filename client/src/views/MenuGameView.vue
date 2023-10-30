@@ -4,7 +4,7 @@
 
     <div class="title">
       <img class="arrow" src="../assets/arrow.png" alt="arrow"/>
-      <h2 @click.prevent="redirectToMenu()">Capture the flag</h2>
+      <h2 @click.prevent="redirectToMenu()">{{cat_name}}</h2>
     </div>
 
     <div class="Menu">
@@ -35,6 +35,7 @@ export default {
     return{
       LogoSmall: require("@/assets/logo_terraquiz.svg"),
       quizzes: [],
+      cat_name: ""
     }
   },
   components: {
@@ -50,11 +51,13 @@ export default {
       this.session = JSON.parse(localStorage.getItem("session"));
       let user_id = this.session.user_id;
       let category_id = this.$route.query.cat
-      console.log(category_id)
 
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/category/${category_id}/${user_id}`).then((response) => {
         this.quizzes = response.data;
-        console.log(this.quizzes)
+      });
+
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/name/${category_id}`).then((response) => {
+        this.cat_name = response.data.category_name;
       });
     }
   },

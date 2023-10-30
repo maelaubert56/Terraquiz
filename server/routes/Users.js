@@ -75,10 +75,14 @@ router.post("/update/privilege/:id_user", async (req, res) => {
     }
 })
 
-router.delete("/delete/:id_user", async (req, res) => {
+router.post("/delete/:id_user", async (req, res) => {
     const {id_user} = req.params
     try {
-        const response = await db.promise().query('DELETE FROM users WHERE id_user = ?', [parseInt(id_user)]);
+        const response = await db.promise().query('DELETE FROM users WHERE user_id = ?', [parseInt(id_user)]);
+        console.log(response[0])
+        const response1 = await db.promise().query('DELETE FROM progress WHERE user_id = ?', [parseInt(id_user)]);
+        console.log(response1[0])
+
         return res.status(200).json(response[0])
     }
     catch (err) {
