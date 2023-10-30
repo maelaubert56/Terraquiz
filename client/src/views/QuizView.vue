@@ -4,12 +4,13 @@
 
     <div class="title">
       <img class="arrow" src="../assets/arrow.png" alt="arrow" @click.prevent="goToGameMenu()" />
-      <h2>Europe - Easy</h2>
+      <h2>{{quiz_name}}</h2>
       <img class="quiz_img" src="../assets/flag.png" alt="flag"/>
     </div>
 
     <div class="QuizArea">
-      <QuizArea v-if="vue>=0" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
+      <QuizArea v-if="vue>=0 && quiz_cat===1" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
+      <QuizAreaWDYS v-if="vue>=0 && quiz_cat===2" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
       <ResultsArea v-if="vue===-1" :score="this.score" @back="goToGameMenu" />
     </div>
 
@@ -22,6 +23,7 @@
 
 import FooterComponent from "@/components/FooterComponent.vue";
 import QuizArea from "@/components/QuizComponents/QuizArea.vue";
+import QuizAreaWDYS from "@/components/QuizComponents/QuizAreaWDYS.vue";
 import ResultsArea from "@/components/QuizComponents/ResultsArea.vue";
 import axios from 'axios';
 
@@ -33,12 +35,14 @@ export default {
       vue:0,
       quiz_cat:1,
       quiz_id:1,
-      score:[]
+      score:[],
+      quiz_name: ""
     }
   },
   components: {
     FooterComponent,
     QuizArea,
+    QuizAreaWDYS,
     ResultsArea
   },
   methods: {
@@ -84,8 +88,9 @@ export default {
     } else {
       this.quiz_cat = parseInt(this.$route.query.cat);
       this.quiz_id = parseInt(this.$route.query.quiz);
-      console.log(this.quiz_cat)
-      console.log(this.quiz_id)
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/${this.quiz_id}`).then((response) => {
+        this.quiz_name = response.data.quiz_name;
+      });
     }
   }
 }

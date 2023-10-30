@@ -1,10 +1,11 @@
 <template>
     <p>{{quiz_instruction}}</p>
-    <span>{{this.vue}}/{{this.vueNb}}</span>
+      <span>{{this.vue}}/{{this.vueNb}}</span>
 
     <div class="QuizQuestion">
       <div class="question">
-        <img :src="require(`@/assets/quiz/flags/${image}.svg`)" alt="flag"/>
+        <p>{{sentence}}</p>
+        <img v-if="lang_code!==null"  class="sound" src="@/assets/play.svg" alt="sound" @click="speak(text=sentence, lang=lang_code)">
       </div>
       <div class="question_answers">
         <button class="answer" :class="answers[0]" @click="checkAnswer(answers[0])" :id="answers[0]">
@@ -49,14 +50,15 @@
 import axios from 'axios';
 
 export default {
-  name: "QuizArea",
+  name: "QuizAreaWDYS",
   data(){
     return{
       answers:[],
       answered:false,
       vue:0,
       vueNb:0,
-      image:'france',
+      sentence:"Setup",
+      lang_code:'en-US',
       quiz_instruction:'Setup...',
       good_answer:"Setup",
       bad_answers:["Setup","Setup","Setup"],
@@ -114,18 +116,18 @@ export default {
               localStorage.setItem("quiz", JSON.stringify(response.data));
               this.vueNb = JSON.parse(localStorage.getItem("quiz")).length
               console.log(this.quiz_type)
-              if (this.quiz_type === 1) { // 1 -> ctf
-                let question = JSON.parse(localStorage.getItem("quiz"))[0]
-                this.vue = 1;
-                this.quiz_instruction = "To which country belongs this flag ?";
-                this.good_answer = question.question_CTF_answer;
-                this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
-                this.answers = [this.good_answer, ...this.bad_answers];
-                this.answers.sort(() => Math.random() - 0.5);
-                this.image = question.question_CTF_flag;
-                this.answered = false;
-                console.log("resquest done, values changed")
-              }
+              let question = JSON.parse(localStorage.getItem("quiz"))[0]
+              this.vue = 1;
+              this.quiz_instruction = "From wich country come this sentence ?";
+              this.good_answer = question.question_WDYS_answer;
+              this.bad_answers = [question.question_WDYS_bad1, question.question_WDYS_bad2, question.question_WDYS_bad3];
+              this.answers = [this.good_answer, ...this.bad_answers];
+              this.answers.sort(() => Math.random() - 0.5);
+              this.sentence = question.question_WDYS_sentence;
+              this.answered = false;
+              this.lang_code = question.question_WDYS_lang_code;
+              console.log("resquest done, values changed")
+
             }
           })
           .catch((error) => {
@@ -135,28 +137,29 @@ export default {
     },
     nextQuestion() {
       if (this.vue < this.vueNb) {
-        if (this.quiz_type === 1) { // 1 -> ctf
-          /* remove the classes from the previous question */
-          let divs = document.getElementsByClassName("answer")
-          Array.from(divs).forEach(element => {
-            element.classList.remove("good_answer");
-            element.classList.remove("bad_answer");
-            element.classList.remove("not_answered");
-          });
-          // add hidden class to the particles
-          document.getElementsByClassName("star")[0].parentElement.classList.add("particles_stars_hidden");
-          document.getElementsByClassName("wrong_chat")[0].parentElement.classList.add("particles_wrong_chat_hidden");
+        /* remove the classes from the previous question */
+        let divs = document.getElementsByClassName("answer")
+        Array.from(divs).forEach(element => {
+          element.classList.remove("good_answer");
+          element.classList.remove("bad_answer");
+          element.classList.remove("not_answered");
+        });
+        // add hidden class to the particles
+        document.getElementsByClassName("star")[0].parentElement.classList.add("particles_stars_hidden");
+        document.getElementsByClassName("wrong_chat")[0].parentElement.classList.add("particles_wrong_chat_hidden");
 
-          let question = JSON.parse(localStorage.getItem("quiz"))[this.vue]
-          this.vue += 1;
-          this.quiz_instruction = "To which country belongs this flag ?";
-          this.good_answer = question.question_CTF_answer;
-          this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
-          this.answers = [this.good_answer, ...this.bad_answers];
-          this.answers.sort(() => Math.random() - 0.5);
-          this.image = question.question_CTF_flag;
-          this.answered = false;
-        }
+        let question = JSON.parse(localStorage.getItem("quiz"))[this.vue]
+        this.vue += 1;
+        this.quiz_instruction = "From wich country come this sentence ?";
+        this.good_answer = question.question_WDYS_answer;
+        this.bad_answers = [question.question_WDYS_bad1, question.question_WDYS_bad2, question.question_WDYS_bad3];
+        this.answers = [this.good_answer, ...this.bad_answers];
+        this.answers.sort(() => Math.random() - 0.5);
+        this.sentence = question.question_WDYS_sentence;
+        this.answered = false;
+        this.lang_code = question.question_WDYS_lang_code;
+        console.log("lang : ",this.lang_code)
+        console.log("next question")
       }
       else{
         this.$emit('quizFinished', this.score);
@@ -164,6 +167,23 @@ export default {
     },
     capitaliseFirstLetterOfAllWords(string) {
       return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    },
+    speak(text, lang) {
+      const msg = new SpeechSynthesisUtterance();
+      console.log(text)
+      msg.text = text
+      msg.volume = 1.0; // speech volume (default: 1.0)
+      msg.pitch = 1.0; // speech pitch (default: 1.0)
+      msg.rate = 1.0; // speech rate (default: 1.0)
+      msg.lang = lang; // BCP 47 language tag (default: "en-US")
+      msg.voiceURI = 'native'; // default: "native"
+      msg.onboundary = function (event) {
+        console.log('Speech reached a boundary:', event.name);
+      };
+      msg.onpause = function (event) {
+        console.log('Speech paused:', event.utterance.text.substring(event.charIndex));
+      };
+      window.speechSynthesis.speak(msg);
     }
   }
 }
@@ -193,13 +213,15 @@ p{
   height: 100%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+
 }
 
 .question>img{
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  border-radius: 20px;
+  width: 40px;
+  height: 40px;
 }
 
 .question_answers{
