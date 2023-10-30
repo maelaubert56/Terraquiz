@@ -32,11 +32,18 @@ router.get("/:username", async (req, res) => {
 
 
 router.post("/create", async (req, res) => {
-    const {username, password, avatar, privilege} = req.body
-    console.log(req.body)
-    console.log(username, password, avatar, privilege)
+    const {username, password, user_pp, privilege} = req.body
     try {
-        const response = await db.promise().query('INSERT INTO users (user_username, user_password, user_pp, user_privilege) VALUES (?, ?, ?, ?)', [username, password, parseInt(avatar), parseInt(privilege)]);
+        const response = await db.promise().query('INSERT INTO users (user_username, user_password, user_pp, user_privilege) VALUES (?, ?, ?, ?)', [username, password, parseInt(user_pp), parseInt(privilege)]);
+        // when the user is created, we create the progress for each quiz in each category
+        // get the id of each quiz
+        const id_user = response[0].insertId
+        const id_quizzes = await db.promise().query('SELECT quiz_id FROM quiz');
+        // for each quiz, we create a progress
+       id_quizzes[0].forEach(async (quiz) => {
+            await db.promise().query('INSERT INTO progress (user_id, quiz_id, progress_value) VALUES (?, ?, ?)', [id_user, quiz.quiz_id, 0]);
+        })
+
         return res.status(200).json(response[0])
     }
     catch (err) {

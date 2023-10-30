@@ -32,6 +32,16 @@ quiz_id INT,
 progress_value DECIMAL(4,0)   NOT NULL,
  */
 
+router.get("/questions/:id_quiz", async (req, res) => {
+    // there are 2 tables for the questions : question_ctf and question_wdys, so we have to look at the 2 tables to find the coorect questions for the quiz id
+    const {id_quiz} = req.params
+    const response1 = await connection.promise().query('SELECT * FROM question_ctf WHERE quiz_id = ?', [parseInt(id_quiz)]);
+    const response2 = await connection.promise().query('SELECT * FROM question_wdys WHERE quiz_id = ?', [parseInt(id_quiz)]);
+    const response = response1[0].concat(response2[0])
+    return res.status(200).json(response)
+})
+
+
 router.get("/:id_quiz", async (req, res) => {
     const {id_quiz} = req.params
     const response = await connection.promise().query('SELECT * FROM quiz WHERE quiz_id = ?', [id_quiz]);
@@ -43,6 +53,27 @@ router.get("/:id_quiz/:id_user", async (req, res) => {
     const response = await connection.promise().query('SELECT * FROM progress WHERE quiz_id = ? AND user_id = ?', [id_quiz, id_user]);
     return res.status(200).json(response[0][0])
 })
+
+router.get("/category/:id_category/:id_user", async (req, res) => {
+    const {id_category, id_user} = req.params
+    const response = await connection.promise().query('SELECT quiz.quiz_id, quiz.quiz_name, quiz.quiz_difficulty, quiz.quiz_image, progress.progress_value FROM quiz LEFT JOIN progress ON quiz.quiz_id = progress.quiz_id WHERE quiz.category_id = ? AND progress.user_id = ?', [id_category, id_user]);
+    return res.status(200).json(response[0])
+})
+
+router.get("/progress/:quiz_id/:user_id", async (req, res) => {
+    const {quiz_id, user_id} = req.params
+    const response = await connection.promise().query('SELECT * FROM progress WHERE quiz_id = ? AND user_id = ?', [quiz_id, user_id]);
+    return res.status(200).json(response[0][0])
+})
+
+router.post("/progress/:id_quiz/:id_user", async (req, res) => {
+    const {id_quiz, id_user} = req.params
+    const {progress_value} = req.body
+    console.log(progress_value, id_quiz, id_user)
+    const response = await connection.promise().query('UPDATE progress SET progress_value = ? WHERE quiz_id = ? AND user_id = ?', [progress_value, id_quiz, id_user]);
+    return res.status(200).json(response[0])
+})
+
 
 module.exports = router
 

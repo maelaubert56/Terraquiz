@@ -131,7 +131,7 @@ export default {
                 {
                   username: username,
                   password: hashedPassword,
-                  avatar: avatar,
+                  user_pp: avatar,
                   privilege: 0
                 }), {
               headers: {
@@ -141,9 +141,10 @@ export default {
         ).then((response) => {
           this.loginForm = true;
           localStorage.setItem('session', JSON.stringify({
+            user_id: response.data.insertId,
             username: username,
             password: hashedPassword,
-            avatar: avatar,
+            user_pp: avatar,
             privilege: 0
           }));
           this.$router.push('/');
@@ -198,11 +199,12 @@ form input{
   height: 50px;
   border: none;
   border-radius: 25px;
-  font-size: 20px;
   text-align: center;
+  font-size: 20px;
   font-weight: 400;
   letter-spacing: 2.5px;
   outline: none;
+  transition: 0.2s;
 }
 
 form input[type="submit"]{
@@ -214,12 +216,24 @@ form input[type="submit"]{
   margin-top:15px;
   transition:0.5s;
   padding: 10px 0;
-  /* remonter le texte */
-  transform: translate(0,-10%);
+
 }
+
 
 form input[type="text"]:valid, form input[type="password"]:valid{
   box-shadow: 0 0 15px 0 #46cf61;
+  transition: 0.2s;
+}
+
+form input[type="text"]::placeholder, form input[type="password"]::placeholder{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  transition: 0.2s;
+}
+form input[type="text"]:focus::placeholder, form input[type="password"]:focus::placeholder{
+  transform: translate(-50%,-200%);
   transition: 0.2s;
 }
 
@@ -232,6 +246,7 @@ form input[type="submit"]:hover{
   box-shadow: 0 0 10px 0 #46CDCF;
   transition: 0.2s;
 }
+
 
 form a{
   font-size: 20px;

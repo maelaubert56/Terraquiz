@@ -9,7 +9,7 @@
           :category="category.category_name"
           :image="category.category_image"
           :score="parseInt(category.progress_value)"
-          @click.prevent="goToGameMenu()"
+          @click.prevent="goToQuizzes(category.category_id)"
       />
     </div>
 
@@ -35,20 +35,23 @@ export default {
     CategoryCard,
     FooterComponent
   },
-  beforeMount() {
-    //get the user id in the session
-    this.session = JSON.parse(localStorage.getItem("session"));
-    let user_id = this.session.user_id;
-    //get all the cat data from the user id
-    axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/${user_id}`).then((response) => {
-      this.categories = response.data;
-    });
-
-
+  created() {
+    //check if there is a session
+    if (!localStorage.getItem("session")) {
+      this.$router.push("/");
+    }else {
+      //get the user id in the session
+      this.session = JSON.parse(localStorage.getItem("session"));
+      let user_id = this.session.user_id;
+      //get all the cat data from the user id
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/categories/${user_id}`).then((response) => {
+        this.categories = response.data;
+      });
+    }
   },
   methods: {
-    goToGameMenu() {
-      this.$router.push("/menu-game");
+    goToQuizzes(category_id) {
+      this.$router.push(`/menu-game?cat=${category_id}`);
     }
   },
 };
