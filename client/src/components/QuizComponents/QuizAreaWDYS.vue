@@ -106,8 +106,9 @@ export default {
     },
     setupQuiz() {
       console.log("executed")
-      //get the quiz from the database
-      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${this.quiz_id}`)
+      let cat_id = this.$route.query.cat;
+      console.log(cat_id)
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${cat_id}/${this.quiz_id}`)
           .then((response) => {
             if(response.data.length === 0){
               this.$router.push({name: 'menu'})
@@ -118,7 +119,7 @@ export default {
               console.log(this.quiz_type)
               let question = JSON.parse(localStorage.getItem("quiz"))[0]
               this.vue = 1;
-              this.quiz_instruction = "From wich country come this sentence ?";
+              this.quiz_instruction = "From which country come this sentence ?";
               this.good_answer = question.question_WDYS_answer;
               this.bad_answers = [question.question_WDYS_bad1, question.question_WDYS_bad2, question.question_WDYS_bad3];
               this.answers = [this.good_answer, ...this.bad_answers];
@@ -149,7 +150,7 @@ export default {
 
         let question = JSON.parse(localStorage.getItem("quiz"))[this.vue]
         this.vue += 1;
-        this.quiz_instruction = "From wich country come this sentence ?";
+        this.quiz_instruction = "From which country come this sentence ?";
         this.good_answer = question.question_WDYS_answer;
         this.bad_answers = [question.question_WDYS_bad1, question.question_WDYS_bad2, question.question_WDYS_bad3];
         this.answers = [this.good_answer, ...this.bad_answers];
