@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 31 oct. 2023 à 05:41
+-- Généré le : mar. 31 oct. 2023 à 09:03
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -104,7 +104,39 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (27, 13, '0'),
 (26, 14, '0'),
 (29, 14, '13'),
-(27, 14, '0');
+(27, 14, '0'),
+(30, 1, '0'),
+(30, 2, '0'),
+(30, 3, '0'),
+(30, 4, '0'),
+(30, 5, '0'),
+(30, 6, '0'),
+(30, 7, '0'),
+(30, 8, '0'),
+(30, 9, '0'),
+(30, 10, '0'),
+(30, 11, '0'),
+(30, 12, '0'),
+(30, 13, '0'),
+(30, 14, '0'),
+(27, 15, '0'),
+(26, 15, '0'),
+(30, 15, '0'),
+(27, 16, '0'),
+(26, 16, '0'),
+(30, 16, '0'),
+(27, 17, '0'),
+(26, 17, '0'),
+(30, 17, '0'),
+(27, 18, '0'),
+(26, 18, '0'),
+(30, 18, '0'),
+(27, 19, '0'),
+(26, 19, '0'),
+(30, 19, '0'),
+(27, 20, '0'),
+(26, 20, '0'),
+(30, 20, '0');
 
 -- --------------------------------------------------------
 
@@ -171,7 +203,7 @@ INSERT INTO `question_ctf` (`question_CTF_id`, `question_CTF_flag`, `question_CT
 (77, 'bosnia_and_herzegovina', 'bosnia_and_herzegovina', 'luxembourg', 'san_marino', 'republic_of_moldova', 3),
 (78, 'north_macedonia', 'north_macedonia', 'serbia', 'lithuania', 'liechtenstein', 3),
 (79, 'monaco', 'monaco', 'san_marino', 'malta', 'bosnia_and_herzegovina', 3),
-(80, 'republic_of_moldova', 'republic_of_moldova', 'belarus', 'lithuania', 'republic_of_moldova', 3),
+(80, 'republic_of_moldova', 'republic_of_moldova', 'belarus', 'lithuania', 'serbia', 3),
 (81, 'liechtenstein', 'liechtenstein', 'republic_of_moldova', 'romania', 'north_macedonia', 3),
 (82, 'san_marino', 'san_marino', 'luxembourg', 'belarus', 'north_macedonia', 3),
 (83, 'united_states_of_america', 'united_states_of_america', 'costa_rica', 'peru', 'dominican_republic', 4),
@@ -280,7 +312,7 @@ INSERT INTO `question_ctf` (`question_CTF_id`, `question_CTF_flag`, `question_CT
 (186, 'maldives', 'maldives', 'yemen', 'nepal', 'timor-leste', 11),
 (187, 'uzbekistan', 'uzbekistan', 'maldives', 'nepal', 'mongolia', 11),
 (188, 'pakistan', 'pakistan', 'armenia', 'palestine', 'tajikistan', 11),
-(189, 'nepal', 'nepal', 'kuwait', 'uzbekistan', 'nepal', 11),
+(189, 'nepal', 'nepal', 'kuwait', 'uzbekistan', 'mongolia', 11),
 (190, 'palestine', 'palestine', 'nepal', 'bangladesh', 'armenia', 11),
 (191, 'mongolia', 'mongolia', 'tajikistan', 'mongolia', 'palestine', 11),
 (192, 'tajikistan', 'tajikistan', 'kuwait', 'nepal', 'lebanon', 11),
@@ -354,7 +386,7 @@ DROP TABLE IF EXISTS `question_wdys`;
 CREATE TABLE IF NOT EXISTS `question_wdys` (
   `question_WDYS_id` int NOT NULL AUTO_INCREMENT,
   `question_WDYS_sentence` varchar(50) NOT NULL,
-  `question_WDYS_lang_code` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
+  `question_WDYS_lang_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `question_WDYS_answer` varchar(50) NOT NULL,
   `question_WDYS_bad1` varchar(50) NOT NULL,
   `question_WDYS_bad2` varchar(50) NOT NULL,
@@ -362,17 +394,88 @@ CREATE TABLE IF NOT EXISTS `question_wdys` (
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_WDYS_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `question_wdys`
 --
 
 INSERT INTO `question_wdys` (`question_WDYS_id`, `question_WDYS_sentence`, `question_WDYS_lang_code`, `question_WDYS_answer`, `question_WDYS_bad1`, `question_WDYS_bad2`, `question_WDYS_bad3`, `quiz_id`) VALUES
-(1, 'This is a simple sentence', 'en-US', 'english', 'french', 'spanish', 'german', 4),
-(2, 'Das ist ein Satz', 'de-DE', 'german', 'french', 'spanish', 'english', 4),
-(3, 'C\'est un test avec des accents èé^¨', 'fr-FR', 'french', 'german', 'spanish', 'english', 4),
-(4, 'זה משפט', NULL, 'hebrew', 'german', 'spanish', 'english', 4);
+(30, 'آرامش در دل انسان به روزهای بی کاری می‌آید.', 'fa', 'Farsi', 'Arabic', 'Turkish', 'Urdu', 16),
+(28, 'Ukufunda akukhomba amathuba.', 'zu', 'Zulu', 'Xhosa', 'Swazi', 'Sotho', 15),
+(29, 'Səmimi gülmə insanın ürəyini açar.', 'az', 'Azeri', 'English', 'Turkish', 'Russian', 16),
+(27, 'Ukufunda kuyiindlela yokwenza imisebenzi emihle.', 'xh', 'Xhosa', 'Zulu', 'Sotho', 'Swazi', 15),
+(26, 'Ku dyondzisa ku nghena emhlabeni.', 'ts', 'Tsonga', 'Zulu', 'Xhosa', 'Swazi', 15),
+(25, 'Tshwaragano ke kgomo ya bolwetsi.', 'tn', 'Tswana', 'Zulu', 'Xhosa', 'Sotho', 15),
+(24, 'Maarifa ni nguvu.', 'sw', 'Swahili', 'Arabic', 'French', 'English', 15),
+(23, 'Tshedza ke go tlhokomela bogosi.', 'ns', 'Northern Sotho', 'Zulu', 'Xhosa', 'Tswana', 15),
+(21, 'Ek is lief vir die reuk van vars brood.', 'af', 'Afrikaans', 'English', 'French', 'German', 15),
+(22, 'العلم يعطي الحكمة.', 'ar', 'Arabic', 'English', 'French', 'Spanish', 15),
+(31, 'વિદ્યા વિના જીવન અદૂર છે.', 'gu', 'Gujarati', 'Hindi', 'Marathi', 'Punjabi', 16),
+(32, 'הבשורה על פי מתי.', 'he', 'Hebrew', 'Arabic', 'Yiddish', 'Russian', 16),
+(33, 'सपने वो नहीं जो हम सोते समय देखते हैं, सपने वो हैं', 'hi', 'Hindi', 'English', 'Urdu', 'Bengali', 16),
+(34, 'Գիտելիքը զինվորվում է ամեն դեպի բարձրություն.', 'hy', 'Armenian', 'Russian', 'Georgian', 'Turkish', 16),
+(35, 'Hidup adalah seni, dan setiap orang seniman.', 'id', 'Indonesian', 'Malay', 'Filipino', 'Javanese', 16),
+(36, '虎穴に入らずんば虎子を得ず。', 'ja', 'Japanese', 'Chinese', 'Korean', 'Vietnamese', 16),
+(37, 'გონება სულს დაეხმარება.', 'ka', 'Georgian', 'Armenian', 'Azerbaijani', 'Russian', 16),
+(38, 'Білім мәнен жүр.', 'kk', 'Kazakh', 'Kyrgyz', 'Uzbek', 'Tatar', 16),
+(39, 'ಹಸಿವಿನಿಂದ ಹುಟ್ಟುವ ಹುಳು ಮೇಲಿದೆ.', 'kn', 'Kannada', 'Telugu', 'Tamil', 'Malayalam', 16),
+(40, '지식은 힘입니다.', 'ko', 'Korean', 'Chinese', 'Japanese', 'Vietnamese', 16),
+(41, 'मनस्सांतां फल वाहून घ्यावं.', 'kok', 'Konkani', 'Marathi', 'Gujarati', 'Kannada', 16),
+(42, 'Билим бир алдымдың казынасы болсо да, ондай болгон', 'ky', 'Kyrgyz', 'Kazakh', 'Uzbek', 'Tajik', 16),
+(43, 'Мэргэжил нь оршин суугаа бол хамгийн сайн ижил бай', 'mn', 'Mongolian', 'Kazakh', 'Kyrgyz', 'Uzbek', 16),
+(44, 'ज्ञानाने संग्रह केलेलं काम कधीचित्कार न करता.', 'mr', 'Marathi', 'Hindi', 'Gujarati', 'Kannada', 16),
+(45, 'Ilmu adalah harta yang paling berharga.', 'ms', 'Malay', 'Indonesian', 'Filipino', 'Javanese', 17),
+(46, 'ਜਾਣਕਾਰੀ ਸਬ ਤੋਂ ਵੱਡਾ ਸਮ੍ਹਾਲਾ ਹੈ.', 'pa', 'Punjabi', 'Hindi', 'Urdu', 'Bengali', 17),
+(47, 'ځان او پوه ځان ژوند دې په ارمانو کې دې.', 'ps', 'Pashto', 'Persian', 'Urdu', 'Arabic', 17),
+(48, 'विद्या ददाति विनयं.', 'sa', 'Sanskrit', 'Hindi', 'Marathi', 'Bengali', 17),
+(49, 'ܫܠܡܐ ܬܪܥܐ ܘܬܒܘܚܐ ܐܦ ܡܕܡܢܚܐ ܩܕܝܡܐ.', 'syr', 'Syriac', 'Arabic', 'Hebrew', 'Assyrian', 17),
+(50, 'அறிவு ஆற்றுவது மிகுந்த ஐசுவார்த்தியம்.', 'ta', 'Tamil', 'Telugu', 'Kannada', 'Malayalam', 17),
+(51, 'పరిజ్ఞానం శక్తి.', 'te', 'Telugu', 'Tamil', 'Kannada', 'Malayalam', 17),
+(52, 'ความรู้คือพลัง.', 'th', 'Thai', 'Chinese', 'Japanese', 'Vietnamese', 17),
+(53, 'Ang edukasyon ay susi sa tagumpay.', 'tl', 'Tagalog', 'Spanish', 'English', 'French', 17),
+(54, 'Bilgi güçtür.', 'tr', 'Turkish', 'Azerbaijani', 'Uzbek', 'Kyrgyz', 17),
+(55, 'Белем - аңыз.', 'tt', 'Tatar', 'Kazakh', 'Kyrgyz', 'Uzbek', 17),
+(56, 'علم سے زندگی میں اتنی کامیابی آتی ہے جیسے روشنی کے', 'ur', 'Urdu', 'Arabic', 'Persian', 'Turkish', 17),
+(57, 'Bilim kuchdir.', 'uz', 'Uzbek', 'Kazakh', 'Kyrgyz', 'Turkmen', 17),
+(58, 'Tri thức là sức mạnh.', 'vi', 'Vietnamese', 'Chinese', 'Korean', 'Japanese', 17),
+(59, '知识改变命运。', 'zh', 'Chinese', 'Japanese', 'Korean', 'Vietnamese', 17),
+(121, 'Elämä on kuin polkupyörä. Jotta pysyisi tasapainos', 'fi', 'Finnish', 'Swedish', 'Norwegian', 'Danish', 18),
+(120, 'Elämä on kuin polkupyörä. Jotta pysyisi tasapainos', 'fi', 'Finnish', 'Swedish', 'Norwegian', 'Danish', 1),
+(119, 'Txoria txori da.', 'eu', 'Basque', 'Spanish', 'French', 'Italian', 18),
+(118, 'Õnn naeratab neile, kes ootavad.', 'et', 'Estonian', 'Finnish', 'Latvian', 'Lithuanian', 18),
+(117, 'La vida es un sueño, y los sueños, sueños son.', 'es', 'Spanish', 'English', 'French', 'Italian', 18),
+(116, 'Time flies when you\'re having fun.', 'en', 'English', 'Spanish', 'French', 'German', 18),
+(115, 'Η γνώση είναι φως και η άγνοια είναι σκοτάδι.', 'el', 'Greek', 'English', 'French', 'Italian', 18),
+(114, 'Die Welt ist ein Buch. Wer nie reist, sieht nur ei', 'de', 'German', 'English', 'French', 'Spanish', 18),
+(113, 'Solen skinner på den blå himmel.', 'da', 'Danish', 'Swedish', 'Norwegian', 'German', 18),
+(112, 'Čas je nejlepší lék.', 'cs', 'Czech', 'Slovak', 'Polish', 'Russian', 18),
+(111, 'El gat està dormint a la butxaca.', 'ca', 'Catalan', 'Spanish', 'French', 'Italian', 18),
+(110, 'Мудрасць - у самасаведамасці.', 'be', 'Belarusian', 'Russian', 'Ukrainian', 'Polish', 18),
+(133, 'Kennis is macht.', 'nl', 'Dutch', 'German', 'English', 'French', 19),
+(132, 'Kunnskap er makt.', 'nb', 'Norwegian', 'Danish', 'Swedish', 'Finnish', 19),
+(131, 'L-isforz ta\' l-edukazzjoni huwa l-arma l-aktar qaw', 'mt', 'Maltese', 'English', 'Italian', 'Spanish', 19),
+(130, 'Знаењето е силата.', 'mk', 'Macedonian', 'Bulgarian', 'Serbian', 'Slovenian', 19),
+(129, 'Zināšanas ir spēks.', 'lv', 'Latvian', 'Lithuanian', 'Estonian', 'Finnish', 19),
+(128, 'Išmintis - tai geriausias turtas.', 'lt', 'Lithuanian', 'Latvian', 'Estonian', 'Finnish', 19),
+(127, 'La vita è un sogno, e sognare è vivere due volte.', 'it', 'Italian', 'Spanish', 'French', 'English', 19),
+(126, 'Það er enginn hollusta nema heilsa.', 'is', 'Icelandic', 'Danish', 'Swedish', 'Norwegian', 19),
+(125, 'Az élet szép, mint a virágok.', 'hu', 'Hungarian', 'Slovak', 'Romanian', 'Czech', 19),
+(124, 'Znanje je ključ uspjeha.', 'hr', 'Croatian', 'Slovenian', 'Serbian', 'Bosnian', 19),
+(123, 'A lingua é a patria.', 'gl', 'Galician', 'Portuguese', 'Spanish', 'Italian', 19),
+(122, 'La vie est belle.', 'fr', 'French', 'Spanish', 'English', 'Italian', 19),
+(98, 'Kunnskap er nøkkelen til suksess.', 'nn-NO', 'Norwegian', 'Danish', 'Swedish', 'Finnish', 20),
+(99, 'Wiedza to potęga.', 'pl', 'Polish', 'Czech', 'Slovak', 'Russian', 20),
+(100, 'A sabedoria é a principal riqueza.', 'pt', 'Portuguese', 'Spanish', 'Italian', 'French', 20),
+(101, 'Cunoașterea este putere.', 'ro', 'Romanian', 'Italian', 'Spanish', 'Portuguese', 20),
+(102, 'Знание - сила.', 'ru', 'Russian', 'Ukrainian', 'Belarusian', 'Polish', 20),
+(103, 'Dáidda lea fámu.', 'se', 'Sami', 'Finnish', 'Norwegian', 'Swedish', 20),
+(104, 'Vedomosti sú sila.', 'sk', 'Slovak', 'Czech', 'Polish', 'Hungarian', 20),
+(105, 'Znanje je moč.', 'sl', 'Slovenian', 'Croatian', 'Serbian', 'Bosnian', 20),
+(106, 'Dija është fuqi.', 'sq', 'Albanian', 'Italian', 'Spanish', 'French', 20),
+(107, 'Знање је светло у тами.', 'sr-BA', 'Serbian', 'Croatian', 'Bosnian', 'Montenegrin', 20),
+(108, 'Kunskap är makt.', 'sv', 'Swedish', 'Danish', 'Norwegian', 'Finnish', 20),
+(109, 'Знання - це сила.', 'uk', 'Ukrainian', 'Russian', 'Polish', 'Belarusian', 20);
 
 -- --------------------------------------------------------
 
@@ -389,7 +492,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
   `category_id` int NOT NULL,
   PRIMARY KEY (`quiz_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `quiz`
@@ -409,7 +512,13 @@ INSERT INTO `quiz` (`quiz_id`, `quiz_name`, `quiz_difficulty`, `quiz_image`, `ca
 (11, 'Asia - Hard', 2, 1, 1),
 (12, 'Africa - Easy', 0, 1, 1),
 (13, 'Africa - Medium', 1, 1, 1),
-(14, 'Africa - Hard', 2, 1, 1);
+(14, 'Africa - Hard', 2, 1, 1),
+(15, 'Africa', 0, 2, 2),
+(16, 'Asia - 1', 0, 2, 2),
+(17, 'Asia - 2', 0, 2, 2),
+(18, 'Europe - 1', 0, 2, 2),
+(19, 'Europe - 2', 0, 2, 2),
+(20, 'Europe - 3', 0, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -421,18 +530,19 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_username` varchar(50) NOT NULL,
-  `user_password` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
+  `user_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `user_pp` tinyint NOT NULL,
   `user_privilege` tinyint NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_username`, `user_password`, `user_pp`, `user_privilege`) VALUES
+(30, 'user5', '$2a$10$bPwDRIF7C9XoVC0WdHuVFucSt0F8aaz33MRwzEuQy.RvAK6IC7n9e', 35, 0),
 (29, 'user31', '$2a$10$R.0QK2wxnJKvVPyeIv1NWeixJwVPyp4rdB5DzseL1qfgjvaO4ndiK', 29, 0),
 (27, 'user3', '$2a$10$SQoJtRIfBI2tKyMyUY23UOAJFLVeUiRm4wdUu2MXO8kOkPW84Mev6', 14, 0),
 (26, 'user1', '$2a$10$SC5jsBDkIUnLXeW9k5N4y.y35tWkzCd5cdoZh4aEBT3dHvJjqIgNO', 16, 0);
