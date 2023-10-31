@@ -1,6 +1,11 @@
 <template>
+  <div v-if="loading===true" class="loading">
+    <div class="loading__container">
+      <h2>Loading...</h2>
+    </div>
+  </div>
   <ChooseAvatar v-if="!isConnected && isModalVisible" :pp_selected="parseInt(pp_selected)" @chooseAvatarEvent="handleChooseAvatar" @closeModalEvent="handleCloseModal"/>
-  <div id="HomePage">
+  <div v-if="loading===false" id="HomePage">
     <img src="../assets/background_mobile.png" alt="Plane" class="plane_mobile">
     <img src="../assets/background_desktop.png" alt="Plane" class="plane_desktop">
     <div>
@@ -17,22 +22,37 @@ import HomeForm from "@/components/HomeComponents/HomeForm.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import ChooseAvatar from "@/components/HomeComponents/HomeChooseAvatar.vue";
 export default {
-    name: 'HomeView',
-    data() {
-      return {
-        isModalVisible: false,
-        pp_selected: null,
-        isConnected: false
-      };
-    },
-    components: {
-      ChooseAvatar,
-      HomeForm,
-      FooterComponent
-    },
-    beforeCreate() {
-      this.isUserConnected = localStorage.getItem("session") !== null;
-    },
+  name: 'HomeView',
+  data() {
+    return {
+      isModalVisible: false,
+      pp_selected: null,
+      isConnected: false,
+      loading: true
+    };
+  },
+  components: {
+    ChooseAvatar,
+    HomeForm,
+    FooterComponent
+  },
+  created(){
+    let imgsrc = ['background_desktop.png', 'background_mobile.png','eye_close.png','edit.svg','eye_open.png','gear.svg','log-out.svg','github.png']
+    let loaded = 0;
+    imgsrc.forEach((img)=>{
+      let image = new Image();
+      image.src = require(`@/assets/${img}`);
+      image.onload = ()=>{
+        loaded++;
+        if(loaded === (imgsrc.length)){
+          this.loading = false;
+        }
+      }
+    })
+  },
+  beforeCreate() {
+    this.isUserConnected = localStorage.getItem("session") !== null;
+  },
   methods: {
     handleChooseAvatar(avatarId) {
       this.pp_selected = avatarId;

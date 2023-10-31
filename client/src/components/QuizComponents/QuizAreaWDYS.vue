@@ -9,20 +9,20 @@
       </div>
       <div class="question_answers">
         <button class="answer" :class="answers[0]" @click="checkAnswer(answers[0])" :id="answers[0]">
-          {{capitaliseFirstLetterOfAllWords(answers[0])}}
+          {{formatWords(answers[0])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross">
         </button>
         <button class="answer" :class="answers[1]" @click="checkAnswer(answers[1])" :id="answers[1]">
-          {{capitaliseFirstLetterOfAllWords(answers[1])}}
+          {{formatWords(answers[1])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
         <button class="answer" :class="answers[2]" @click="checkAnswer(answers[2])" :id="answers[2]">
-          {{capitaliseFirstLetterOfAllWords(answers[2])}}
+          {{formatWords(answers[2])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
         <button class="answer" :class="answers[3]" @click="checkAnswer(answers[3])" :id="answers[3]">
-          {{capitaliseFirstLetterOfAllWords(answers[3])}}
+          {{formatWords(answers[3])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
       </div>
@@ -127,7 +127,6 @@ export default {
               this.answered = false;
               this.lang_code = question.question_WDYS_lang_code;
               console.log("resquest done, values changed")
-
             }
           })
           .catch((error) => {
@@ -165,7 +164,8 @@ export default {
         this.$emit('quizFinished', this.score);
       }
     },
-    capitaliseFirstLetterOfAllWords(string) {
+    formatWords(string) {
+      string = string.replace(/_/g, " ");
       return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
     },
     speak(text, lang) {

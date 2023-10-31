@@ -8,20 +8,20 @@
       </div>
       <div class="question_answers">
         <button class="answer" :class="answers[0]" @click="checkAnswer(answers[0])" :id="answers[0]">
-          {{capitaliseFirstLetterOfAllWords(answers[0])}}
+          {{formatWords(answers[0])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross">
         </button>
         <button class="answer" :class="answers[1]" @click="checkAnswer(answers[1])" :id="answers[1]">
-          {{capitaliseFirstLetterOfAllWords(answers[1])}}
+          {{formatWords(answers[1])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
         <button class="answer" :class="answers[2]" @click="checkAnswer(answers[2])" :id="answers[2]">
-          {{capitaliseFirstLetterOfAllWords(answers[2])}}
+          {{formatWords(answers[2])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
         <button class="answer" :class="answers[3]" @click="checkAnswer(answers[3])" :id="answers[3]">
-          {{capitaliseFirstLetterOfAllWords(answers[3])}}
+          {{formatWords(answers[3])}}
           <img src="@/assets/check.svg" alt="check" class="check">
           <img src="@/assets/cross.svg" alt="cross" class="cross"></button>
       </div>
@@ -104,8 +104,9 @@ export default {
     },
     setupQuiz() {
       console.log("executed")
-      //get the quiz from the database
-      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${this.quiz_id}`)
+      let cat_id = this.$route.query.cat;
+      console.log(cat_id)
+      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${cat_id}/${this.quiz_id}`)
           .then((response) => {
             if(response.data.length === 0){
               this.$router.push({name: 'menu'})
@@ -114,18 +115,25 @@ export default {
               localStorage.setItem("quiz", JSON.stringify(response.data));
               this.vueNb = JSON.parse(localStorage.getItem("quiz")).length
               console.log(this.quiz_type)
-              if (this.quiz_type === 1) { // 1 -> ctf
-                let question = JSON.parse(localStorage.getItem("quiz"))[0]
-                this.vue = 1;
-                this.quiz_instruction = "To which country belongs this flag ?";
-                this.good_answer = question.question_CTF_answer;
-                this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
-                this.answers = [this.good_answer, ...this.bad_answers];
-                this.answers.sort(() => Math.random() - 0.5);
-                this.image = question.question_CTF_flag;
-                this.answered = false;
-                console.log("resquest done, values changed")
-              }
+              let question = JSON.parse(localStorage.getItem("quiz"))[0]
+              this.vue = 1;
+              this.quiz_instruction = "To which country belongs this flag ?";
+              this.good_answer = question.question_CTF_answer;
+              this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
+              this.answers = [this.good_answer, ...this.bad_answers];
+              this.answers.sort(() => Math.random() - 0.5);
+              this.image = question.question_CTF_flag;
+              this.answered = false;
+              console.log("resquest done, values changed")
+              // prerequest all the images in the quiz
+              let images = JSON.parse(localStorage.getItem("quiz")).map((question) => {
+                return question.question_CTF_flag
+              })
+              images.forEach((image) => {
+                let img = new Image();
+                img.src = require(`@/assets/quiz/flags/${image}.svg`);
+              })
+
             }
           })
           .catch((error) => {
@@ -162,7 +170,8 @@ export default {
         this.$emit('quizFinished', this.score);
       }
     },
-    capitaliseFirstLetterOfAllWords(string) {
+    formatWords(string) {
+      string = string.replace(/_/g, ' ');
       return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
     }
   }
