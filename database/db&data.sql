@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `category_name` varchar(50) NOT NULL,
   `category_image` varchar(50) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `category`
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS `progress` (
   `progress_value` decimal(4,0) NOT NULL,
   PRIMARY KEY (`user_id`,`quiz_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `progress`
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `question_ctf` (
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_CTF_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `question_ctf`
@@ -354,7 +354,7 @@ DROP TABLE IF EXISTS `question_wdys`;
 CREATE TABLE IF NOT EXISTS `question_wdys` (
   `question_WDYS_id` int NOT NULL AUTO_INCREMENT,
   `question_WDYS_sentence` varchar(50) NOT NULL,
-  `question_WDYS_lang_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
+  `question_WDYS_lang_code` varchar(50) CHARACTER SET utf8mb4 DEFAULT NULL,
   `question_WDYS_answer` varchar(50) NOT NULL,
   `question_WDYS_bad1` varchar(50) NOT NULL,
   `question_WDYS_bad2` varchar(50) NOT NULL,
@@ -362,7 +362,7 @@ CREATE TABLE IF NOT EXISTS `question_wdys` (
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_WDYS_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `question_wdys`
@@ -389,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
   `category_id` int NOT NULL,
   PRIMARY KEY (`quiz_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `quiz`
@@ -421,12 +421,12 @@ DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `user_id` int NOT NULL AUTO_INCREMENT,
   `user_username` varchar(50) NOT NULL,
-  `user_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
+  `user_password` varchar(100) CHARACTER SET utf8mb4 NOT NULL,
   `user_pp` tinyint NOT NULL,
   `user_privilege` tinyint NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Déchargement des données de la table `users`
