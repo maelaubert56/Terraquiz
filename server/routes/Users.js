@@ -22,6 +22,8 @@ router.get("/", async (req, res) => {
     return res.status(200).json(response[0])
 })
 
+
+
 router.get("/:username", async (req, res) => {
     const {username} = req.params
     db.query('SELECT * FROM users WHERE user_username = ?', [username], (err, result) => {

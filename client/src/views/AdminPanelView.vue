@@ -1,6 +1,5 @@
 <template>
   <div id="adminpanel">
-    {{console.log('hello')}}
     <img src="@/assets/logo.png" alt="logo" @click="() => $router.push('/')" />
     <div class="stats_container">
       <div class="nb_registered">
@@ -18,7 +17,7 @@
         <div class="user_manage_list">
           <input class="search" type="text" placeholder="Search...">
           <div class="users_list">
-            <div v-for="(user, index) in users" class="user" :key="index" @click="this.selected_user = user">
+            <div v-for="(user, index) in users" class="user" :key="index" @click="this.selected_user = user" :class="this.selected_user === user ? 'selected' : ''">
               <img :src='"/assets/profile_pictures/3D_avatars_pack/"+user.user_pp+".svg"' alt="profilepicture">
               <p>{{user.user_username}}</p>
               <img class="privilege" :style="user.user_privilege === 0 ? 'opacity:0' : ''"
@@ -32,8 +31,10 @@
           <span v-if="this.selected_user !== null">
             <img :src='"/assets/profile_pictures/3D_avatars_pack/"+this.selected_user.user_pp + ".svg"' alt="profilepicture">
             <p>{{this.selected_user.user_username}}</p>
-            <span>{{this.selected_user.user_privilege === 0 ? "User" : this.selected_user.user_privilege === 1 ? "Admin" : "Super Admin"}}</span>
-            <img class="privilege" :style="this.selected_user.user_privilege === 0 ? 'opacity:0' : ''" :src='this.selected_user.user_privilege === 0 ? "" : this.selected_user.user_privilege === 1 ? require("@/assets/admin_icon.svg") : require("@/assets/superadmin_icon.svg")' alt="privilege">
+            <div class="privilege">
+              <span>{{this.selected_user.user_privilege === 0 ? "User" : this.selected_user.user_privilege === 1 ? "Admin" : "Super Admin"}}</span>
+              <img  :style="this.selected_user.user_privilege === 0 ? 'display:none' : ''" :src='this.selected_user.user_privilege === 0 ? "" : this.selected_user.user_privilege === 1 ? require("@/assets/admin_icon.svg") : require("@/assets/superadmin_icon.svg")' alt="privilege">
+            </div>
           </span>
           <div class="user_manage_actions_buttons" v-if="this.selected_user !== null">
             <button class="change_privilege">Upgrade</button>
@@ -53,8 +54,8 @@ export default {
   data() {
     return {
       stats:{
-        nb_registered:50,
-        nb_quizzes_answered:130,
+        nb_registered:0,
+        nb_quizzes_answered:0,
       },
       users: [],
       selected_user:null
@@ -73,11 +74,16 @@ export default {
         axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
         .then((response) => {
           this.users = response.data;
-          console.log(this.users)
         })
         .catch((error) => {
           console.log(error);
         });
+
+        //get the stats
+        axios.get(`${process.env.VUE_APP_SERVER_API_URL}/stats`)
+        .then((response) => {
+          this.stats = response.data;
+        })
       }
     }
   },
@@ -181,13 +187,29 @@ h1, h2, h3, a, p, span{
   display:flex;
   justify-content: center;
   align-items: center;
+  flex-direction: column;
   gap:20px;
+  font-size:20px;
 }
 
 .user_manage_actions>span>img{
-  width:40px;
-  height: 40px;
+  width:40%;
   border-radius:50%;
+}
+
+.user_manage_actions>span>.privilege{
+  font-size: 16px;
+  padding:5px 15px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.5);
+  border-radius:20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap:10px;
+}
+
+.user_manage_actions>span>.privilege>img{
+  width:30px;
 }
 
 .user_manage_actions_buttons{
@@ -238,6 +260,7 @@ h1, h2, h3, a, p, span{
 
 .user_manage_list>.users_list{
   padding-top:10px;
+  padding-bottom:10px;
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -260,6 +283,7 @@ h1, h2, h3, a, p, span{
 
 
 .user_manage_list .user{
+  border: 2px solid transparent;
   padding: 10px 0;
   background: #5E5C89;
   width:28%;
@@ -270,13 +294,21 @@ h1, h2, h3, a, p, span{
   border-radius:20px;
   gap:5px;
   transition:0.2s;
+  opacity:0.8;
 }
 
 .user_manage_list .user:hover{
   background: #48466D;
   box-shadow: 0 0 5px rgba(0,0,0,0.5);
-  opacity:0.6;
+  opacity:1;
+  transition:0.2s;
+}
+
+.selected{
+  background: #48466D !important;
+  border: 2px solid #FFC947 !important;
   transform:scale(0.99);
+  opacity:1 !important;
   transition:0.2s;
 }
 .user_manage_list .user>img{
