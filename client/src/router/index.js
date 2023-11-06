@@ -25,6 +25,10 @@ const routes = [
     path: '/settings',
     name: 'settings',
     component: () => import('../views/SettingsView.vue')
+  },{
+    path:'/adminpanel',
+    name:'adminpanel',
+    component:() => import('../views/AdminPanelView.vue')
   },
   {
     path: '/:pathMatch(.*)*',
