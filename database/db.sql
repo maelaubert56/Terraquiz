@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 31 oct. 2023 à 05:45
+-- Généré le : mar. 21 nov. 2023 à 20:34
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -66,6 +66,25 @@ CREATE TABLE IF NOT EXISTS `question_ctf` (
   `question_CTF_bad3` varchar(50) NOT NULL,
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_CTF_id`),
+  KEY `quiz_id` (`quiz_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `question_ftc`
+--
+
+DROP TABLE IF EXISTS `question_ftc`;
+CREATE TABLE IF NOT EXISTS `question_ftc` (
+  `question_FTC_id` int NOT NULL AUTO_INCREMENT,
+  `question_FTC_capital` varchar(50) NOT NULL,
+  `question_FTC_answer` varchar(50) NOT NULL,
+  `question_FTC_bad1` varchar(50) NOT NULL,
+  `question_FTC_bad2` varchar(50) NOT NULL,
+  `question_FTC_bad3` varchar(50) NOT NULL,
+  `quiz_id` int NOT NULL,
+  PRIMARY KEY (`question_FTC_id`),
   KEY `quiz_id` (`quiz_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 

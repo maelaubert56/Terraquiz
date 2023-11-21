@@ -12,7 +12,7 @@
       <h2>challenge your geography skills</h2>
       <!-- if not connected -->
       <HomeForm :isConnected="isUserConnected" :pp_selected="parseInt(pp_selected)" @openModalEvent="handleOpenModal" />
-      <FooterComponent :isConnected="isUserConnected" />
+      <FooterComponent :isConnected="isUserConnected" :isAdmin="isUserAdmin" />
     </div>
   </div>
 </template>
@@ -52,6 +52,9 @@ export default {
   },
   beforeCreate() {
     this.isUserConnected = localStorage.getItem("session") !== null;
+    if (this.isUserConnected) {
+      this.isUserAdmin = JSON.parse(localStorage.getItem("session")).user_privilege > 0;
+    }
   },
   methods: {
     handleChooseAvatar(avatarId) {

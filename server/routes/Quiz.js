@@ -50,7 +50,8 @@ router.get("/questions/:cat_id/:id_quiz", async (req, res) => {
     let catnameResponse  = await connection.promise().query('SELECT category_name FROM category WHERE category_id = ?', [cat_id]);
     let catname = catnameResponse [0][0].category_name
     if(catname === "Capture The Flag"){catname="question_ctf"}
-    else if(catname === "What Did You Said ?"){catname="question_wdys"}
+    else if(catname === "What Did You Say ?"){catname="question_wdys"}
+    else if(catname === "Find The Capital"){catname="question_ftc"}
 
     const query = `SELECT * FROM ${catname} WHERE quiz_id = ?`;
     const response = await connection.promise().query(query, [parseInt(id_quiz)]);

@@ -4,7 +4,7 @@
 
     <div class="QuizQuestion">
       <div class="question">
-        <img :src="require(`@/assets/quiz/flags/${image}.svg`)" alt="flag"/>
+        <p>{{capital}}</p>
       </div>
       <div class="question_answers">
         <button class="answer" :class="answers[0]" @click="checkAnswer(answers[0])" :id="answers[0]">
@@ -49,14 +49,14 @@
 import axios from 'axios';
 
 export default {
-  name: "QuizArea",
+  name: "QuizAreaFTC",
   data(){
     return{
       answers:[],
       answered:false,
       vue:0,
       vueNb:0,
-      image:'france',
+      capital:'france',
       quiz_instruction:'Setup...',
       good_answer:"Setup",
       bad_answers:["Setup","Setup","Setup"],
@@ -117,23 +117,14 @@ export default {
               console.log(this.quiz_type)
               let question = JSON.parse(localStorage.getItem("quiz"))[0]
               this.vue = 1;
-              this.quiz_instruction = "To which country belongs this flag ?";
-              this.good_answer = question.question_CTF_answer;
-              this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
+              this.quiz_instruction = "To which country belongs this capital ?";
+              this.good_answer = question.question_FTC_answer;
+              this.bad_answers = [question.question_FTC_bad1, question.question_FTC_bad2, question.question_FTC_bad3];
               this.answers = [this.good_answer, ...this.bad_answers];
               this.answers.sort(() => Math.random() - 0.5);
-              this.image = question.question_CTF_flag;
+              this.capital = question.question_FTC_capital
               this.answered = false;
               console.log("resquest done, values changed")
-              // prerequest all the images in the quiz
-              let images = JSON.parse(localStorage.getItem("quiz")).map((question) => {
-                return question.question_CTF_flag
-              })
-              images.forEach((image) => {
-                let img = new Image();
-                img.src = require(`@/assets/quiz/flags/${image}.svg`);
-              })
-
             }
           })
           .catch((error) => {
@@ -142,8 +133,9 @@ export default {
       console.log(this.quiz_instruction)
     },
     nextQuestion() {
+      console.log("next question")
       if (this.vue < this.vueNb) {
-        if (this.quiz_type === 1) { // 1 -> ctf
+        if (this.quiz_type === 3) { // 3 -> ctf
           /* remove the classes from the previous question */
           let divs = document.getElementsByClassName("answer")
           Array.from(divs).forEach(element => {
@@ -158,11 +150,11 @@ export default {
           let question = JSON.parse(localStorage.getItem("quiz"))[this.vue]
           this.vue += 1;
           this.quiz_instruction = "To which country belongs this flag ?";
-          this.good_answer = question.question_CTF_answer;
-          this.bad_answers = [question.question_CTF_bad1, question.question_CTF_bad2, question.question_CTF_bad3];
+          this.good_answer = question.question_FTC_answer;
+          this.bad_answers = [question.question_FTC_bad1, question.question_FTC_bad2, question.question_FTC_bad3];
           this.answers = [this.good_answer, ...this.bad_answers];
           this.answers.sort(() => Math.random() - 0.5);
-          this.image = question.question_CTF_flag;
+          this.capital = question.question_FTC_capital
           this.answered = false;
         }
       }
