@@ -3,8 +3,8 @@
     <img class="logo" :src="LogoSmall" alt="logo" @click="() => $router.push('/')" />
 
     <div class="title">
-      <img class="arrow" src="../assets/arrow.png" alt="arrow"/>
-      <h2 @click.prevent="redirectToMenu()">{{cat_name}}</h2>
+      <img class="arrow" src="../assets/arrow.png" alt="arrow" @click.prevent="redirectToMenu()"/>
+      <h2>{{cat_name}}</h2>
     </div>
 
     <div class="Menu">
@@ -95,6 +95,7 @@ export default {
 }
 
 .Menu{
+  width:70%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -111,7 +112,22 @@ export default {
 }
 
 .arrow{
-  height: 50px;
+  height: 30px;
+}
+
+@keyframes move{
+  0%{
+    transform: translateX(0px);
+  }
+  100%{
+    transform: translateX(-5px);
+  }
+}
+
+.arrow:hover{
+  /* move from right to left */
+  cursor: pointer;
+  animation: move 0.5s ease-in-out infinite alternate;
 }
 
 </style>

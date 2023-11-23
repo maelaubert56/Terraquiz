@@ -27,6 +27,7 @@ export default {
 <style scoped>
 
 .Category{
+  width:100%;
   padding: 20px 25px;
 
   border-radius: 30px;
@@ -96,6 +97,28 @@ h3{
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+@media (max-width: 768px) {
+  .Category{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-bottom: 30px;
+  }
+
+  .Category>img {
+    display: none;
+  }
+
+  #Progress{
+    width: 100%;
+  }
+
+  .load-bar-back{
+    width: 80%;
+  }
 }
 
 </style>
