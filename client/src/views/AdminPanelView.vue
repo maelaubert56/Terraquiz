@@ -15,7 +15,7 @@
     <div class="user_manage_container">
       <div class="left">
         <div class="user_manage_list">
-          <input class="search" type="text" placeholder="Search...">
+          <input class="search" type="text" placeholder="Search..." v-model="search" @input="search_user">
           <div class="users_list">
             <div v-for="(user, index) in users" class="user" :key="index" @click="this.selected_user = user" :class="this.selected_user === user ? 'selected' : ''">
               <img :src='"/assets/profile_pictures/3D_avatars_pack/"+user.user_pp+".svg"' alt="profilepicture">
@@ -37,8 +37,8 @@
             </div>
           </span>
           <div class="user_manage_actions_buttons" v-if="this.selected_user !== null">
-            <button class="change_privilege">Upgrade</button>
-            <button class="delete">Delete</button>
+            <button class="change_privilege" v-if="this.session.user_privilege === 2 && this.selected_user.user_privilege !== 2" @click="this.selected_user.user_privilege === 0 ? update_privilege(this.selected_user, 1) : update_privilege(this.selected_user, 0)">{{this.selected_user.user_privilege === 0 ? "Make Admin" : "Make User"}}</button>
+            <button class="delete" v-if="(this.session.user_privilege === 2 && this.selected_user.user_privilege !== 2) ||  (this.session.user_privilege===1 && this.selected_user.user_privilege === 0)" @click="delete_user(this.selected_user)">Delete</button>
           </div>
         </div>
       </div>
@@ -58,14 +58,17 @@ export default {
         nb_quizzes_answered:0,
       },
       users: [],
-      selected_user:null
+      selected_user:null,
+      session: null,
+      search: "",
     };
   },
-  beforeCreate() {
+  beforeMount() {
     if (!localStorage.getItem("session")) {
       this.$router.push("/");
     } else {
       this.session = JSON.parse(localStorage.getItem("session"));
+      console.log(this.session)
       if (this.session.user_privilege === 0) {
         this.$router.push("/");
       }
@@ -87,6 +90,56 @@ export default {
       }
     }
   },
+  methods:{
+    search_user(){
+      if (this.search === "") {
+        axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
+        .then((response) => {
+          this.users = response.data;
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+      else {
+        axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/search/${this.search}`)
+            .then((response) => {
+              this.users = response.data;
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+      }
+    },
+    update_privilege(user, privilege){
+      if(this.session.user_privilege === 2){
+        axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/update/privilege/${user.user_id}`, {privilege:privilege})
+        .then((response) => {
+          axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
+          .then((response) => {
+            this.users = response.data;
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    },
+    delete_user(user){
+      if((this.session.user_privilege === 2 && this.selected_user.user_privilege !== 2) ||  (this.session.user_privilege===1 && this.selected_user.user_privilege === 0)){
+        axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/delete/${user.user_id}`)
+        .then((response) => {
+          axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
+          .then((response) => {
+            this.users = response.data;
+          })
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+      }
+    }
+  }
 
 }
 

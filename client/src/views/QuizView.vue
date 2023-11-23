@@ -5,12 +5,13 @@
     <div class="title">
       <img class="arrow" src="../assets/arrow.png" alt="arrow" @click.prevent="goToGameMenu()" />
       <h2>{{quiz_name}}</h2>
-      <img class="quiz_img" src="../assets/flag.png" alt="flag"/>
+      <img class="quiz_img" :src="quiz_image" alt="quiz_image" />
     </div>
 
     <div class="QuizArea">
-      <QuizArea v-if="vue>=0 && quiz_cat===1" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
+      <QuizAreaCTF v-if="vue>=0 && quiz_cat===1" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
       <QuizAreaWDYS v-if="vue>=0 && quiz_cat===2" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
+      <QuizAreaFTC v-if="vue>=0 && quiz_cat===3" :quiz_type="quiz_cat" :quiz_id="quiz_id" @quizFinished="quizFinished" />
       <ResultsArea v-if="vue===-1" :score="this.score" @back="goToGameMenu" />
     </div>
 
@@ -22,8 +23,9 @@
 <script>
 
 import FooterComponent from "@/components/FooterComponent.vue";
-import QuizArea from "@/components/QuizComponents/QuizArea.vue";
+import QuizAreaCTF from "@/components/QuizComponents/QuizAreaCTF.vue";
 import QuizAreaWDYS from "@/components/QuizComponents/QuizAreaWDYS.vue";
+import QuizAreaFTC from "@/components/QuizComponents/QuizAreaFTC.vue";
 import ResultsArea from "@/components/QuizComponents/ResultsArea.vue";
 import axios from 'axios';
 
@@ -36,13 +38,15 @@ export default {
       quiz_cat:1,
       quiz_id:1,
       score:[],
-      quiz_name: ""
+      quiz_name: "",
+      quiz_image: ""
     }
   },
   components: {
     FooterComponent,
-    QuizArea,
+    QuizAreaCTF,
     QuizAreaWDYS,
+    QuizAreaFTC,
     ResultsArea
   },
   methods: {
@@ -88,8 +92,12 @@ export default {
     } else {
       this.quiz_cat = parseInt(this.$route.query.cat);
       this.quiz_id = parseInt(this.$route.query.quiz);
+
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/${this.quiz_id}`).then((response) => {
         this.quiz_name = response.data.quiz_name;
+        this.quiz_image = '/assets/quiz_images/' + response.data.quiz_image + '.png';
+        console.log(this.quiz_name);
+        console.log(this.quiz_image)
       });
     }
   }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : mar. 31 oct. 2023 à 09:03
+-- Généré le : mar. 21 nov. 2023 à 20:33
 -- Version du serveur : 8.0.31
 -- Version de PHP : 8.0.26
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `category` (
   `category_name` varchar(50) NOT NULL,
   `category_image` varchar(50) NOT NULL,
   PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `category`
@@ -41,7 +41,8 @@ CREATE TABLE IF NOT EXISTS `category` (
 
 INSERT INTO `category` (`category_id`, `category_name`, `category_image`) VALUES
 (1, 'Capture The Flag', '1'),
-(2, 'What Did You Said ?', '2');
+(2, 'What Did You Say ?', '2'),
+(3, 'Find The Capital', '3');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `progress` (
   `progress_value` decimal(4,0) NOT NULL,
   PRIMARY KEY (`user_id`,`quiz_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `progress`
@@ -65,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `progress` (
 INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (26, 3, '0'),
 (26, 2, '0'),
-(26, 1, '0'),
+(26, 1, '21'),
 (29, 6, '69'),
 (29, 7, '40'),
 (27, 8, '0'),
@@ -120,23 +121,133 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (30, 13, '0'),
 (30, 14, '0'),
 (27, 15, '0'),
-(26, 15, '0'),
+(26, 15, '13'),
 (30, 15, '0'),
 (27, 16, '0'),
-(26, 16, '0'),
+(26, 16, '19'),
 (30, 16, '0'),
 (27, 17, '0'),
-(26, 17, '0'),
+(26, 17, '13'),
 (30, 17, '0'),
 (27, 18, '0'),
-(26, 18, '0'),
+(26, 18, '45'),
 (30, 18, '0'),
 (27, 19, '0'),
-(26, 19, '0'),
+(26, 19, '42'),
 (30, 19, '0'),
 (27, 20, '0'),
-(26, 20, '0'),
-(30, 20, '0');
+(26, 20, '17'),
+(30, 20, '0'),
+(31, 1, '0'),
+(31, 2, '0'),
+(31, 3, '0'),
+(31, 4, '0'),
+(31, 5, '0'),
+(31, 6, '0'),
+(31, 7, '0'),
+(31, 8, '0'),
+(31, 9, '0'),
+(31, 10, '0'),
+(31, 11, '0'),
+(31, 12, '0'),
+(31, 13, '0'),
+(31, 14, '0'),
+(31, 15, '0'),
+(31, 16, '0'),
+(31, 17, '0'),
+(31, 18, '0'),
+(31, 19, '0'),
+(31, 20, '0'),
+(32, 1, '0'),
+(32, 2, '0'),
+(32, 3, '0'),
+(32, 4, '0'),
+(32, 5, '0'),
+(32, 6, '0'),
+(32, 7, '0'),
+(32, 8, '0'),
+(32, 9, '0'),
+(32, 10, '0'),
+(32, 11, '0'),
+(32, 12, '77'),
+(32, 13, '0'),
+(32, 14, '47'),
+(32, 15, '0'),
+(32, 16, '0'),
+(32, 17, '0'),
+(32, 18, '0'),
+(32, 19, '0'),
+(32, 20, '0'),
+(27, 21, '0'),
+(26, 21, '100'),
+(30, 21, '0'),
+(31, 21, '0'),
+(32, 21, '0'),
+(27, 22, '0'),
+(26, 22, '40'),
+(30, 22, '0'),
+(31, 22, '0'),
+(32, 22, '0'),
+(27, 23, '0'),
+(26, 23, '27'),
+(30, 23, '0'),
+(31, 23, '0'),
+(32, 23, '0'),
+(27, 24, '0'),
+(26, 24, '21'),
+(30, 24, '0'),
+(31, 24, '0'),
+(32, 24, '0'),
+(27, 25, '0'),
+(26, 25, '42'),
+(30, 25, '0'),
+(31, 25, '0'),
+(32, 25, '0'),
+(27, 26, '0'),
+(26, 26, '29'),
+(30, 26, '0'),
+(31, 26, '0'),
+(32, 26, '0'),
+(27, 27, '0'),
+(26, 27, '17'),
+(30, 27, '0'),
+(31, 27, '0'),
+(32, 27, '0'),
+(27, 28, '0'),
+(26, 28, '43'),
+(30, 28, '0'),
+(31, 28, '0'),
+(32, 28, '0'),
+(27, 29, '0'),
+(26, 29, '21'),
+(30, 29, '0'),
+(31, 29, '0'),
+(32, 29, '0'),
+(27, 30, '0'),
+(26, 30, '25'),
+(30, 30, '0'),
+(31, 30, '0'),
+(32, 30, '0'),
+(27, 31, '0'),
+(26, 31, '33'),
+(30, 31, '0'),
+(31, 31, '0'),
+(32, 31, '0'),
+(27, 32, '0'),
+(26, 32, '19'),
+(30, 32, '0'),
+(31, 32, '0'),
+(32, 32, '0'),
+(27, 33, '0'),
+(26, 33, '40'),
+(30, 33, '0'),
+(31, 33, '0'),
+(32, 33, '0'),
+(27, 34, '0'),
+(26, 34, '42'),
+(30, 34, '0'),
+(31, 34, '0'),
+(32, 34, '0');
 
 -- --------------------------------------------------------
 
@@ -155,7 +266,7 @@ CREATE TABLE IF NOT EXISTS `question_ctf` (
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_CTF_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `question_ctf`
@@ -379,6 +490,209 @@ INSERT INTO `question_ctf` (`question_CTF_id`, `question_CTF_flag`, `question_CT
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `question_ftc`
+--
+
+DROP TABLE IF EXISTS `question_ftc`;
+CREATE TABLE IF NOT EXISTS `question_ftc` (
+  `question_FTC_id` int NOT NULL AUTO_INCREMENT,
+  `question_FTC_capital` varchar(50) NOT NULL,
+  `question_FTC_answer` varchar(50) NOT NULL,
+  `question_FTC_bad1` varchar(50) NOT NULL,
+  `question_FTC_bad2` varchar(50) NOT NULL,
+  `question_FTC_bad3` varchar(50) NOT NULL,
+  `quiz_id` int NOT NULL,
+  PRIMARY KEY (`question_FTC_id`),
+  KEY `quiz_id` (`quiz_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `question_ftc`
+--
+
+INSERT INTO `question_ftc` (`question_FTC_id`, `question_FTC_capital`, `question_FTC_answer`, `question_FTC_bad1`, `question_FTC_bad2`, `question_FTC_bad3`, `quiz_id`) VALUES
+(1, 'paris', 'france', 'netherlands', 'italy', 'spain', 21),
+(2, 'madrid', 'spain', 'france', 'croatia', 'portugal', 21),
+(3, 'rome', 'italy', 'croatia', 'france', 'turkey', 21),
+(4, 'london', 'united_kingdom', 'france', 'russian_federation', 'poland', 21),
+(5, 'ankara', 'turkey', 'spain', 'russian_federation', 'france', 21),
+(6, 'berlin', 'germany', 'poland', 'austria', 'united_kingdom', 21),
+(7, 'vienna', 'austria', 'hungary', 'poland', 'united_kingdom', 21),
+(8, 'athens', 'greece', 'russian_federation', 'spain', 'germany', 21),
+(9, 'moscow', 'russian_federation', 'united_kingdom', 'hungary', 'portugal', 21),
+(10, 'lisbon', 'portugal', 'united_kingdom', 'germany', 'netherlands', 21),
+(11, 'warsaw', 'poland', 'united_kingdom', 'hungary', 'russian_federation', 21),
+(12, 'amsterdam', 'netherlands', 'france', 'germany', 'russian_federation', 21),
+(13, 'budapest', 'hungary', 'poland', 'netherlands', 'greece', 21),
+(14, 'zagre', 'croatia', 'austria', 'russian_federation', 'italy', 21),
+(15, 'Kiev', 'ukraine', 'cyprus', 'albania', 'slovenia', 22),
+(16, 'Prague', 'czech_republic', 'ireland', 'slovenia', 'cyprus', 22),
+(17, 'Berne', 'switzerland', 'belgium', 'estonia', 'slovakia', 22),
+(18, 'Copenhagen', 'denmark', 'sweden', 'ukraine', 'bulgaria', 22),
+(19, 'Dublin', 'ireland', 'ukraine', 'sweden', 'denmark', 22),
+(20, 'Sofia', 'bulgaria', 'cyprus', 'albania', 'czech_republic', 22),
+(21, 'Brussels', 'belgium', 'denmark', 'bulgaria', 'cyprus', 22),
+(22, 'Stockholm', 'sweden', 'ukraine', 'ireland', 'slovenia', 22),
+(23, 'Oslo', 'norway', 'albania', 'belgium', 'sweden', 22),
+(24, 'Bratislava', 'slovakia', 'bulgaria', 'belgium', 'albania', 22),
+(25, 'Tirane', 'albania', 'czech_republic', 'finland', 'sweden', 22),
+(26, 'Nicosia', 'cyprus', 'slovenia', 'ireland', 'denmark', 22),
+(27, 'Ljubljana', 'slovenia', 'ireland', 'estonia', 'belgium', 22),
+(28, 'Tallinn', 'estonia', 'bulgaria', 'slovenia', 'slovakia', 22),
+(29, 'Helsink', 'finland', 'estonia', 'slovakia', 'bulgaria', 22),
+(30, 'Andorra la Vella', 'andorra', 'serbia', 'malta', 'liechtenstein', 23),
+(31, 'Bucharest', 'romania', 'san_marino', 'malta', 'liechtenstein', 23),
+(32, 'Vilnius', 'lithuania', 'andorra', 'serbia', 'malta', 23),
+(33, 'Valletta', 'malta', 'lithuania', 'serbia', 'republic_of_moldova', 23),
+(34, 'Reykjavik', 'iceland', 'romania', 'serbia', 'liechtenstein', 23),
+(35, 'Minsk', 'belarus', 'north_macedonia', 'montenegro', 'republic_of_moldova', 23),
+(36, 'Podgorica', 'montenegro', 'andorra', 'liechtenstein', 'belarus', 23),
+(37, 'Belgrade', 'serbia', 'monaco', 'liechtenstein', 'andorra', 23),
+(38, 'Luxembourg', 'luxembourg', 'malta', 'serbia', 'romania', 23),
+(39, 'Sarajevo', 'bosnia_and_herzegovina', 'republic_of_moldova', 'liechtenstein', 'romania', 23),
+(40, 'Skopje', 'north_macedonia', 'serbia', 'monaco', 'bosnia_and_herzegovina', 23),
+(41, 'Monte Carlo', 'monaco', 'lithuania', 'belarus', 'bosnia_and_herzegovina', 23),
+(42, 'Chisinau', 'republic_of_moldova', 'luxembourg', 'belarus', 'monaco', 23),
+(43, 'Vaduz', 'liechtenstein', 'luxembourg', 'malta', 'belarus', 23),
+(44, 'San Marin', 'san_marino', 'romania', 'montenegro', 'belarus', 23),
+(45, 'Washington D.C.', 'united states of america', 'brazil', 'panama', 'dominican republic', 24),
+(46, 'Mexico City', 'mexico', 'canada', 'brazil', 'uruguay', 24),
+(47, 'Ottawa', 'canada', 'jamaica', 'colombia', 'chile', 24),
+(48, 'Buenos Aires', 'argentina', 'panama', 'colombia', 'dominican republic', 24),
+(49, 'Brasilia', 'brazil', 'argentina', 'costa rica', 'mexico', 24),
+(50, 'Santiago', 'chile', 'argentina', 'panama', 'jamaica', 24),
+(51, 'Santo Domingo', 'dominican republic', 'costa rica', 'chile', 'united states of america', 24),
+(52, 'Lima', 'peru', 'united states of america', 'costa rica', 'mexico', 24),
+(53, 'Bogota', 'colombia', 'uruguay', 'dominican republic', 'united states of america', 24),
+(54, 'Havana', 'cuba', 'panama', 'dominican republic', 'chile', 24),
+(55, 'Montevideo', 'uruguay', 'mexico', 'united states of america', 'canada', 24),
+(56, 'San Jose', 'costa rica', 'uruguay', 'colombia', 'united states of america', 24),
+(57, 'Kingston', 'jamaica', 'costa rica', 'cuba', 'canada', 24),
+(58, 'Panama City', 'panama', 'united states of america', 'canada', 'mexico', 24),
+(59, 'Managua', 'nicaragua', 'el salvador', 'bahamas', 'guatemala', 25),
+(60, 'Guatemala City', 'guatemala', 'paraguay', 'el salvador', 'ecuador', 25),
+(61, 'Quito', 'ecuador', 'bahamas', 'nicaragua', 'bolivia', 25),
+(62, 'San Salvador', 'el salvador', 'honduras', 'bahamas', 'ecuador', 25),
+(63, 'Asuncion', 'paraguay', 'venezuela', 'barbados', 'el salvador', 25),
+(64, 'Nassau', 'bahamas', 'honduras', 'ecuador', 'haiti', 25),
+(65, 'La Paz', 'bolivia', 'haiti', 'honduras', 'el salvador', 25),
+(66, 'Tegucigalpa', 'honduras', 'guatemala', 'venezuela', 'bahamas', 25),
+(67, 'Bridgetown', 'barbados', 'guatemala', 'nicaragua', 'venezuela', 25),
+(68, 'Caracas', 'venezuela', 'honduras', 'guatemala', 'bahamas', 25),
+(69, 'Port-au-Prince', 'haiti', 'barbados', 'ecuador', 'paraguay', 25),
+(70, 'Belmopan', 'belize', 'paraguay', 'haiti', 'guatemala', 25),
+(71, 'Port-of-Spain', 'trinidad and tobago', 'antigua and barbuda', 'saint kitts and nevis', 'saint lucia', 26),
+(72, 'Castries', 'saint lucia', 'saint kitts and nevis', 'guyana', 'antigua and barbuda', 26),
+(73, 'Paramaribo', 'suriname', 'trinidad and tobago', 'saint kitts and nevis', 'trinidad and tobago', 26),
+(74, 'Saint John\'s', 'antigua and barbuda', 'saint lucia', 'antigua and barbuda', 'saint kitts and nevis', 26),
+(75, 'Georgetown', 'guyana', 'antigua and barbuda', 'saint kitts and nevis', 'saint lucia', 26),
+(76, 'Saint George\'s', 'grenada', 'guyana', 'antigua and barbuda', 'suriname', 26),
+(77, 'Basseterre', 'saint kitts and nevis', 'saint lucia', 'antigua and barbuda', 'grenada', 26),
+(78, 'Jakarta', 'indonesia', 'papua new guinea', 'fiji', 'australia', 27),
+(79, 'Canberra', 'australia', 'papua new guinea', 'samoa', 'new zealand', 27),
+(80, 'Wellington', 'new zealand', 'papua new guinea', 'indonesia', 'australia', 27),
+(81, 'Suva', 'fiji', 'indonesia', 'new zealand', 'papua new guinea', 27),
+(82, 'Port Moresby', 'papua new guinea', 'fiji', 'samoa', 'papua new guinea', 27),
+(83, 'Apia', 'samoa', 'new zealand', 'new zealand', 'papua new guinea', 27),
+(84, 'Melekeok', 'palau', 'vanuatu', 'tonga', 'tuvalu', 28),
+(85, 'Port-Vila', 'vanuatu', 'kiribati', 'federated states of micronesia', 'solomon islands', 28),
+(86, 'Nuku\'alofa', 'tonga', 'federated states of micronesia', 'solomon islands', 'palau', 28),
+(87, 'Palikir', 'federated states of micronesia', 'palau', 'tonga', 'kiribati', 28),
+(88, 'Honiara', 'solomon islands', 'federated states of micronesia', 'solomon islands', 'tonga', 28),
+(89, 'Tarawa Atoll', 'kiribati', 'solomon islands', 'palau', 'solomon islands', 28),
+(90, 'Vaiaku village', 'tuvalu', 'solomon islands', 'vanuatu', 'solomon islands', 28),
+(91, 'Beijing', 'china', 'turkey', 'thailand', 'vietnam', 29),
+(92, 'Ankara', 'turkey', 'japan', 'saudi arabia', 'singapore', 29),
+(93, 'Bangkok', 'thailand', 'turkey', 'japan', 'singapore', 29),
+(94, 'Tokyo', 'japan', 'singapore', 'south korea', 'vietnam', 29),
+(95, 'Kuala Lumpur', 'malaysia', 'china', 'syrian arab republic', 'united arab emirates', 29),
+(96, 'Riyadh', 'saudi arabia', 'japan', 'singapore', 'syrian arab republic', 29),
+(97, 'Abu Dhabi', 'united arab emirates', 'singapore', 'syrian arab republic', 'china', 29),
+(98, 'New Delhi', 'india', 'united arab emirates', 'thailand', 'saudi arabia', 29),
+(99, 'Singapore', 'singapore', 'india', 'saudi arabia', 'vietnam', 29),
+(100, 'Seoul', 'south korea', 'india', 'japan', 'syrian arab republic', 29),
+(101, 'Jakarta', 'indonesia', 'taiwan', 'thailand', 'japan', 29),
+(102, 'Hanoi', 'vietnam', 'syrian arab republic', 'indonesia', 'turkey', 29),
+(103, 'Taipei', 'taiwan', 'south korea', 'malaysia', 'japan', 29),
+(104, 'Damascus', 'syrian arab republic', 'south korea', 'thailand', 'malaysia', 29),
+(105, 'Manila', 'philippines', 'bahrain', 'iran', 'kyrgyzstan', 30),
+(106, 'Phnom Penh', 'cambodia', 'israel', 'qatar', 'cyprus', 30),
+(107, 'Tehran', 'iran', 'georgia', 'qatar', 'bahrain', 30),
+(108, 'Nur Sultan', 'kazakhstan', 'israel', 'bahrain', 'sri lanka', 30),
+(109, 'Manama', 'bahrain', 'qatar', 'myanmar', 'kazakhstan', 30),
+(110, 'Amman', 'jordan', 'cambodia', 'israel', 'oman', 30),
+(111, 'Nicosia', 'cyprus', 'azerbaijan', 'bahrain', 'philippines', 30),
+(112, 'Jerusalem', 'israel', 'azerbaijan', 'philippines', 'myanmar', 30),
+(113, 'Tbilisi', 'georgia', 'laos', 'philippines', 'jordan', 30),
+(114, 'Nay Pyi Taw', 'myanmar', 'oman', 'sri lanka', 'georgia', 30),
+(115, 'Vientiane', 'laos', 'georgia', 'myanmar', 'cyprus', 30),
+(116, 'Bishkek', 'kyrgyzstan', 'israel', 'cyprus', 'oman', 30),
+(117, 'Baku', 'azerbaijan', 'sri lanka', 'cyprus', 'myanmar', 30),
+(118, 'Muscat', 'oman', 'kyrgyzstan', 'georgia', 'laos', 30),
+(119, 'Doha', 'qatar', 'israel', 'cyprus', 'azerbaijan', 30),
+(120, 'Colombo', 'sri lanka', 'iran', 'qatar', 'bahrain', 30),
+(121, 'Beirut', 'lebanon', 'iraq', 'bhutan', 'brunei', 31),
+(122, 'Baghdad', 'iraq', 'mongolia', 'lebanon', 'nepal', 31),
+(123, 'Yerevan', 'armenia', 'iraq', 'kuwait', 'palestine', 31),
+(124, 'Male', 'maldives', 'tajikistan', 'yemen', 'bangladesh', 31),
+(125, 'Tashkent', 'uzbekistan', 'armenia', 'palestine', 'maldives', 31),
+(126, 'Islamabad', 'pakistan', 'yemen', 'lebanon', 'kuwait', 31),
+(127, 'Kathmandu', 'nepal', 'lebanon', 'yemen', 'brunei', 31),
+(128, 'Ramallah, East Jerusalem', 'palestine', 'tajikistan', 'brunei', 'kuwait', 31),
+(129, 'Ulaanbaatar', 'mongolia', 'lebanon', 'bhutan', 'uzbekistan', 31),
+(130, 'Dushanbe', 'tajikistan', 'kuwait', 'brunei', 'iraq', 31),
+(131, 'Sanaa', 'yemen', 'uzbekistan', 'pakistan', 'kuwait', 31),
+(132, 'Bandar Seri Begawan', 'brunei', 'nepal', 'pakistan', 'bangladesh', 31),
+(133, 'Thimphu', 'bhutan', 'brunei', 'bangladesh', 'lebanon', 31),
+(134, 'Kuwait City', 'kuwait', 'lebanon', 'tajikistan', 'brunei', 31),
+(135, 'Dhaka', 'bangladesh', 'mongolia', 'bhutan', 'kuwait', 31),
+(136, 'Rabat', 'morocco', 'namibia', 'mozambique', 'tanzania', 32),
+(137, 'Cape Town', 'south africa', 'zimbabwe', 'côte d\'ivoire', 'uganda', 32),
+(138, 'Cairo', 'egypt', 'tunisia', 'zimbabwe', 'senegal', 32),
+(139, 'Tunis', 'tunisia', 'kenya', 'uganda', 'south africa', 32),
+(140, 'Algiers', 'algeria', 'tanzania', 'kenya', 'mauritius', 32),
+(141, 'Harare', 'zimbabwe', 'uganda', 'tanzania', 'botswana', 32),
+(142, 'Abuja', 'nigeria', 'côte d\'ivoire', 'mozambique', 'tunisia', 32),
+(143, 'Yamoussoukro', 'côte d\'ivoire', 'tanzania', 'kenya', 'senegal', 32),
+(144, 'Maputo', 'mozambique', 'morocco', 'mauritius', 'nigeria', 32),
+(145, 'Gaborone', 'botswana', 'mauritius', 'côte d\'ivoire', 'egypt', 32),
+(146, 'Windhoek', 'namibia', 'tunisia', 'zimbabwe', 'uganda', 32),
+(147, 'Nairobi', 'kenya', 'tanzania', 'uganda', 'south africa', 32),
+(148, 'Port Louis', 'mauritius', 'nigeria', 'côte d\'ivoire', 'mozambique', 32),
+(149, 'Kampala', 'uganda', 'senegal', 'zimbabwe', 'kenya', 32),
+(150, 'Dar es Salaam', 'tanzania', 'mozambique', 'namibia', 'uganda', 32),
+(151, 'Dakar', 'senegal', 'nigeria', 'tanzania', 'namibia', 32),
+(152, 'Lusaka', 'zambia', 'ghana', 'ethiopia', 'madagascar', 33),
+(153, 'Mbabane', 'swaziland', 'togo', 'the democratic republic of the congo', 'seychelles', 33),
+(154, 'Accra', 'ghana', 'togo', 'swaziland', 'cameroon', 33),
+(155, 'Addis Ababa', 'ethiopia', 'lesotho', 'sudan', 'madagascar', 33),
+(156, 'Lilongwe', 'malawi', 'cameroon', 'benin', 'togo', 33),
+(157, 'Khartoum', 'sudan', 'togo', 'lesotho', 'cameroon', 33),
+(158, 'Praia', 'cape verde', 'cameroon', 'the democratic republic of the congo', 'seychelles', 33),
+(159, 'Yaounde', 'cameroon', 'zambia', 'ethiopia', 'benin', 33),
+(160, 'Lome', 'togo', 'seychelles', 'the democratic republic of the congo', 'sudan', 33),
+(161, 'Maseru', 'lesotho', 'angola', 'togo', 'swaziland', 33),
+(162, 'Luanda', 'angola', 'zambia', 'sudan', 'benin', 33),
+(163, 'Kinshasa', 'the democratic republic of the congo', 'angola', 'lesotho', 'seychelles', 33),
+(164, 'Victoria', 'seychelles', 'lesotho', 'togo', 'angola', 33),
+(165, 'Porto-Novo', 'benin', 'swaziland', 'cape verde', 'ghana', 33),
+(166, 'Antananarivo', 'madagascar', 'lesotho', 'sudan', 'togo', 33),
+(167, 'Brazzaville', 'republic of the congo', 'guinea-bissau', 'central african republic', 'mali', 34),
+(168, 'Bamako', 'mali', 'eritrea', 'central african republic', 'burkina faso', 34),
+(169, 'Gitega', 'burundi', 'niger', 'eritrea', 'chad', 34),
+(170, 'Niamey', 'niger', 'comoros', 'chad', 'burkina faso', 34),
+(171, 'Ouagadougou', 'burkina faso', 'comoros', 'chad', 'burundi', 34),
+(172, 'Asmara', 'eritrea', 'mali', 'central african republic', 'niger', 34),
+(173, 'Bangui', 'central african republic', 'burundi', 'eritrea', 'guinea', 34),
+(174, 'N\'Djamena', 'chad', 'djibouti', 'burkina faso', 'mali', 34),
+(175, 'Conakry', 'guinea', 'republic of the congo', 'mali', 'republic of the congo', 34),
+(176, 'Djibouti', 'djibouti', 'eritrea', 'niger', 'mali', 34),
+(177, 'Bissau', 'guinea-bissau', 'niger', 'mali', 'burkina faso', 34),
+(178, 'Moron', 'comoros', 'djibouti', 'mali', 'burkina faso', 34);
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `question_wdys`
 --
 
@@ -394,7 +708,7 @@ CREATE TABLE IF NOT EXISTS `question_wdys` (
   `quiz_id` int NOT NULL,
   PRIMARY KEY (`question_WDYS_id`),
   KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `question_wdys`
@@ -492,7 +806,7 @@ CREATE TABLE IF NOT EXISTS `quiz` (
   `category_id` int NOT NULL,
   PRIMARY KEY (`quiz_id`),
   KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `quiz`
@@ -518,7 +832,21 @@ INSERT INTO `quiz` (`quiz_id`, `quiz_name`, `quiz_difficulty`, `quiz_image`, `ca
 (17, 'Asia - 2', 0, 2, 2),
 (18, 'Europe - 1', 0, 2, 2),
 (19, 'Europe - 2', 0, 2, 2),
-(20, 'Europe - 3', 0, 2, 2);
+(20, 'Europe - 3', 0, 2, 2),
+(21, 'Europe - Easy', 0, 3, 3),
+(22, 'Europe - Medium', 1, 3, 3),
+(23, 'Europe - Hard', 2, 3, 3),
+(24, 'America - Easy', 0, 3, 3),
+(25, 'Armerica - Medium', 1, 3, 3),
+(26, 'America - Hard', 2, 3, 3),
+(27, 'Oceania - Easy', 0, 3, 3),
+(28, 'Oceania - Medium', 1, 3, 3),
+(29, 'Asia - Easy', 0, 3, 3),
+(30, 'Asia - Medium', 1, 3, 3),
+(31, 'Asia - Hard', 2, 3, 3),
+(32, 'Africa - Easy', 0, 3, 3),
+(33, 'Africa - Medium', 1, 3, 3),
+(34, 'Africa - Hard', 2, 3, 3);
 
 -- --------------------------------------------------------
 
@@ -535,17 +863,19 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_privilege` tinyint NOT NULL,
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=MyISAM AUTO_INCREMENT=31 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `users`
 --
 
 INSERT INTO `users` (`user_id`, `user_username`, `user_password`, `user_pp`, `user_privilege`) VALUES
+(32, 'user8', '$2a$10$7cEd9XgrpQPTlq87wPHRpebiU9YrBkekDhx64yplrdlvc3GrOrCPK', 31, 0),
+(31, 'user33', '$2a$10$xWvF4F7PMZyPcC84YIs31uH1VJzFQ/WKZlc.iMsKmcdTjxZ8IWbhG', 24, 1),
 (30, 'user5', '$2a$10$bPwDRIF7C9XoVC0WdHuVFucSt0F8aaz33MRwzEuQy.RvAK6IC7n9e', 35, 0),
 (29, 'user31', '$2a$10$R.0QK2wxnJKvVPyeIv1NWeixJwVPyp4rdB5DzseL1qfgjvaO4ndiK', 29, 0),
-(27, 'user3', '$2a$10$SQoJtRIfBI2tKyMyUY23UOAJFLVeUiRm4wdUu2MXO8kOkPW84Mev6', 14, 0),
-(26, 'user1', '$2a$10$SC5jsBDkIUnLXeW9k5N4y.y35tWkzCd5cdoZh4aEBT3dHvJjqIgNO', 16, 0);
+(27, 'user3', '$2a$10$SQoJtRIfBI2tKyMyUY23UOAJFLVeUiRm4wdUu2MXO8kOkPW84Mev6', 14, 1),
+(26, 'user1', '$2a$10$SC5jsBDkIUnLXeW9k5N4y.y35tWkzCd5cdoZh4aEBT3dHvJjqIgNO', 16, 2);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

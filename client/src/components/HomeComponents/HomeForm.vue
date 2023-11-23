@@ -142,10 +142,10 @@ export default {
           this.loginForm = true;
           localStorage.setItem('session', JSON.stringify({
             user_id: response.data.insertId,
-            username: username,
-            password: hashedPassword,
+            user_username: username,
+            user_password: hashedPassword,
             user_pp: avatar,
-            privilege: 0
+            user_privilege: 0
           }));
           this.$router.push('/');
           window.location.reload();

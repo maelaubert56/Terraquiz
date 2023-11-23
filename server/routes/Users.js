@@ -32,6 +32,14 @@ router.get("/:username", async (req, res) => {
     });
 })
 
+router.get("/search/:username", async (req, res) => {
+    const {username} = req.params
+    db.query('SELECT * FROM users WHERE user_username LIKE ?', ['%' + username + '%'], (err, result) => {
+        if (err) throw err;
+        return res.status(200).json(result)
+    });
+})
+
 
 router.post("/create", async (req, res) => {
     const {username, password, user_pp, privilege} = req.body
@@ -68,8 +76,9 @@ router.post("/update/:id_user", async (req, res) => {
 router.post("/update/privilege/:id_user", async (req, res) => {
     const {id_user} = req.params
     const {privilege} = req.body
+    console.log(privilege);
     try {
-        const response = await db.promise().query('UPDATE users SET user_privilege = ? WHERE id_user = ?', [parseInt(privilege), parseInt(id_user)]);
+        const response = await db.promise().query('UPDATE users SET user_privilege = ? WHERE user_id = ?', [parseInt(privilege), parseInt(id_user)]);
         return res.status(200).json(response[0])
     }
     catch (err) {
