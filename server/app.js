@@ -1,8 +1,9 @@
 const express = require('express');
 const app = express();
-const port = 3000;
-const cors = require('cors');
 require('dotenv').config();
+const port = process.env.SERVER_PORT;
+const cors = require('cors');
+const cookieParser = require("cookie-parser")
 const mysql = require('mysql2');
 const db = mysql.createConnection({
     host: process.env.DB_HOST,
@@ -11,11 +12,20 @@ const db = mysql.createConnection({
     database: process.env.DB_NAME
 });
 
+// print all the requests
+app.use((req, res, next) => {
+    console.log('Time:', Date.now());
+    console.log(req.method, req.url);
+    next();
+});
+
+app.use(cookieParser());
+
 const userRoutes = require('./routes/Users');
 const quizRoutes = require('./routes/Quiz');
 const categoriesRoute = require('./routes/Categories');
 
-app.use(cors({ origin: process.env.CLIENT_URL, optionsSuccessStatus: 200 }));
+app.use(cors({ origin: process.env.CLIENT_URL, optionsSuccessStatus: 200, credentials: true }));
 app.use(express.json({limit: '50mb'}));
 
 app.use('/users', userRoutes);
@@ -31,5 +41,5 @@ app.get("/stats", async (req, res) => {
 })
 
 app.listen(port, () => {
-    console.log(`Server is running at http://localhost:${port}`);
+    console.log(`Server is running at port:${port}`);
 });

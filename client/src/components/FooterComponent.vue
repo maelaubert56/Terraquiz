@@ -8,6 +8,8 @@
 </template>
 
 <script>
+import axios from "axios";
+
 export default {
   name: 'FooterComponent',
   props: {
@@ -32,6 +34,7 @@ export default {
     },
     logout() {
       localStorage.removeItem('session');
+      axios.delete(`${process.env.VUE_APP_SERVER_API_URL}/users/logout`, { withCredentials: true });
       if (this.$route.path === '/') {
         window.location.reload();
       } else {

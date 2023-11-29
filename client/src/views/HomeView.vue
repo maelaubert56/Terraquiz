@@ -11,8 +11,8 @@
     <div>
       <h2>challenge your geography skills</h2>
       <!-- if not connected -->
-      <HomeForm :isConnected="isUserConnected" :pp_selected="parseInt(pp_selected)" @openModalEvent="handleOpenModal" />
-      <FooterComponent :isConnected="isUserConnected" :isAdmin="isUserAdmin" />
+      <HomeForm :isConnected="isConnected" :pp_selected="parseInt(pp_selected)" @openModalEvent="handleOpenModal" />
+      <FooterComponent :isConnected="isConnected" :isAdmin="isAdmin" />
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@
 import HomeForm from "@/components/HomeComponents/HomeForm.vue";
 import FooterComponent from "@/components/FooterComponent.vue";
 import ChooseAvatar from "@/components/HomeComponents/HomeChooseAvatar.vue";
+import axios from "axios";
 export default {
   name: 'HomeView',
   data() {
@@ -28,6 +29,7 @@ export default {
       isModalVisible: false,
       pp_selected: null,
       isConnected: false,
+      isAdmin: false,
       loading: true
     };
   },
@@ -36,7 +38,7 @@ export default {
     HomeForm,
     FooterComponent
   },
-  created(){
+  beforeMount(){
     let imgsrc = ['background_desktop.png', 'background_mobile.png','eye_close.png','edit.svg','eye_open.png','gear.svg','log-out.svg','github.png']
     let loaded = 0;
     imgsrc.forEach((img)=>{
@@ -50,11 +52,27 @@ export default {
       }
     })
   },
-  beforeCreate() {
-    this.isUserConnected = localStorage.getItem("session") !== null;
-    if (this.isUserConnected) {
-      this.isUserAdmin = JSON.parse(localStorage.getItem("session")).user_privilege > 0;
-    }
+  created() {
+    // use the route users/checkConnection to check if the user is connected
+    // if the response is 401, the user is not connected so this.isUserConnected = false
+    // if the response is 200, the user is connected so this.isUserConnected = true, then we check if the user is admin in the response
+
+    axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/checkConnection`, { withCredentials: true })
+      .then((response) => {
+        if (response.status === 200) {
+          // change localstorage
+          localStorage.setItem("session", JSON.stringify(response.data));
+          console.log("response.data: " + JSON.stringify(response.data));
+          this.isConnected = true;
+          this.isAdmin = response.data.user_privilege > 0;
+          this.pp_selected = response.data.user_pp;
+        }
+      })
+      .catch((error) => {
+        if (error.response.status === 401) {
+          this.isConnected = false;
+        }
+      });
   },
   methods: {
     handleChooseAvatar(avatarId) {
@@ -65,6 +83,7 @@ export default {
     },
     handleOpenModal() {
       this.isModalVisible = true;
+      console.log('open')
     }
   }
 };
