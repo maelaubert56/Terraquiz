@@ -5,6 +5,7 @@
     <div class="QuizQuestion">
       <div class="question">
         <p>{{capital}}</p>
+        <img :src=image alt="capital" class="capital">
       </div>
       <div class="question_answers">
         <button class="answer" :class="answers[0]" @click="checkAnswer(answers[0])" :id="answers[0]">
@@ -60,7 +61,8 @@ export default {
       quiz_instruction:'Setup...',
       good_answer:"Setup",
       bad_answers:["Setup","Setup","Setup"],
-      score:[]
+      score:[],
+      image:""
     }
   },
   props: {
@@ -103,7 +105,6 @@ export default {
       }
     },
     setupQuiz() {
-      console.log("executed")
       let cat_id = this.$route.query.cat;
       console.log(cat_id)
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${cat_id}/${this.quiz_id}`)
@@ -122,8 +123,10 @@ export default {
               this.bad_answers = [question.question_FTC_bad1, question.question_FTC_bad2, question.question_FTC_bad3];
               this.answers = [this.good_answer, ...this.bad_answers];
               this.answers.sort(() => Math.random() - 0.5);
-              this.capital = question.question_FTC_capital
+              this.capital = this.formatWords(question.question_FTC_capital)
               this.answered = false;
+              this.getImage(question.question_FTC_capital, 'LyxzFRM8wFTvkbXMLHl0V7jKn2oN9DD3I0Gt95fCKP8')
+
               console.log("resquest done, values changed")
             }
           })
@@ -149,13 +152,15 @@ export default {
 
           let question = JSON.parse(localStorage.getItem("quiz"))[this.vue]
           this.vue += 1;
-          this.quiz_instruction = "To which country belongs this flag ?";
+          this.quiz_instruction = "To which country belongs this capital ?";
           this.good_answer = question.question_FTC_answer;
           this.bad_answers = [question.question_FTC_bad1, question.question_FTC_bad2, question.question_FTC_bad3];
           this.answers = [this.good_answer, ...this.bad_answers];
           this.answers.sort(() => Math.random() - 0.5);
-          this.capital = question.question_FTC_capital
+          this.capital = this.formatWords(question.question_FTC_capital)
           this.answered = false;
+
+          this.getImage(question.question_FTC_capital, 'LyxzFRM8wFTvkbXMLHl0V7jKn2oN9DD3I0Gt95fCKP8')
         }
       }
       else{
@@ -165,6 +170,15 @@ export default {
     formatWords(string) {
       string = string.replace(/_/g, ' ');
       return string.replace(/(^\w{1})|(\s+\w{1})/g, letter => letter.toUpperCase());
+    },
+    getImage(keyword,apikey){
+      axios.get(`https://api.unsplash.com/search/photos?query=${keyword}%20town%20aerial&client_id=${apikey}`)
+          .then((response) => {
+            this.image = response.data.results[0].urls.regular;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
     }
   }
 }
@@ -194,11 +208,19 @@ p{
   height: 100%;
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap:10px
 }
 
+.question>p{
+  font-size:25px;
+}
+
+
 .question>img{
-  width: 100%;
-  height: 100%;
+  width: 80%;
+  height: 80%;
   object-fit: cover;
   border-radius: 20px;
 }

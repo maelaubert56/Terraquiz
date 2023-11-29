@@ -301,6 +301,7 @@ p{
 
 
 button{
+  padding: 5px 20px;
   color: #FFF;
   font-size: 20px;
   font-style: normal;
@@ -384,7 +385,27 @@ button{
   transform: translateY(-100%) scaleX(1);
 }
 
+@media (max-width: 768px) {
 
+
+  .QuizQuestion {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .question {
+    width: 70%;
+    object-fit:contain;
+  }
+
+  .question_answers {
+    width: 100%;
+  }
+
+  .question_answers button {
+    width: 100%;
+  }
+}
 
 
 </style>

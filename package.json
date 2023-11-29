@@ -5,5 +5,8 @@
     "client": "cd client && npm run serve",
     "server": "cd server && npm run start",
     "all": "concurrently --kill-others \"npm run server\" \"npm run client\""
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
   }
 }

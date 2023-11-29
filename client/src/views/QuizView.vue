@@ -133,7 +133,7 @@ export default {
   gap: 20px;
 }
 .arrow{
-  height: 50px;
+  height: 30px;
 }
 .quiz_img{
   height: 50px;
@@ -154,4 +154,25 @@ export default {
   padding: 20px 50px;
 }
 
+@keyframes move{
+  0%{
+    transform: translateX(0px);
+  }
+  100%{
+    transform: translateX(-5px);
+  }
+}
+
+.arrow:hover{
+  /* move from right to left */
+  cursor:pointer;
+  animation: move 0.5s ease-in-out infinite alternate;
+}
+@media (max-width: 768px) {
+  .QuizArea{
+    width: 80vw;
+    padding: 20px 20px;
+    margin: 20px 0;
+  }
+}
 </style>

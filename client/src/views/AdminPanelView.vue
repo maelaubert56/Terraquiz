@@ -64,31 +64,38 @@ export default {
     };
   },
   beforeMount() {
-    if (!localStorage.getItem("session")) {
-      this.$router.push("/");
-    } else {
-      this.session = JSON.parse(localStorage.getItem("session"));
-      console.log(this.session)
-      if (this.session.user_privilege === 0) {
-        this.$router.push("/");
-      }
-      else{
-        // get all the users
-        axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
-        .then((response) => {
-          this.users = response.data;
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/checkConnection`, { withCredentials: true })
+    .then((response) => {
+      if (response.status === 200) {
+        this.session = response.data;
+        if(this.session.user_privilege === 0){
+          this.$router.push('/');
+        }
+        else{
+          // get all the users
+          axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
+          .then((response) => {
+            this.users = response.data;
+          })
+          .catch((error) => {
+            console.log(error);
+          });
 
-        //get the stats
-        axios.get(`${process.env.VUE_APP_SERVER_API_URL}/stats`)
-        .then((response) => {
-          this.stats = response.data;
-        })
+          //get the stats
+          axios.get(`${process.env.VUE_APP_SERVER_API_URL}/stats`)
+          .then((response) => {
+            this.stats = response.data;
+          })
+        }
       }
-    }
+      }
+    )
+    .catch((error) => {
+        if (error.response.status === 401) {
+          this.$router.push('/login');
+        }
+      }
+    );
   },
   methods:{
     search_user(){
@@ -118,6 +125,10 @@ export default {
           axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
           .then((response) => {
             this.users = response.data;
+            // update the selected user
+            this.selected_user = this.users.find((user) => {
+              return user.user_id === this.selected_user.user_id;
+            })
           })
         })
         .catch((error) => {
@@ -132,6 +143,8 @@ export default {
           axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users`)
           .then((response) => {
             this.users = response.data;
+            // update the selected user
+            this.selected_user = null;
           })
         })
         .catch((error) => {

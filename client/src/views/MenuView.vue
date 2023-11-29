@@ -80,6 +80,7 @@ export default {
 }
 
 .Menu{
+  width: 60%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

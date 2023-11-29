@@ -44,8 +44,6 @@
 
 <script>
 import axios from 'axios';
-import bcrypt from 'bcryptjs';
-const salt = bcrypt.genSaltSync(10);
 
 
 
@@ -65,6 +63,7 @@ export default {
     pp_selected: Number
   },
   beforeMount() {
+    console.log("connected: " + this.isConnected)
     if (this.isConnected) {
       //get the user id in the session
       this.session = JSON.parse(localStorage.getItem("session"));
@@ -97,24 +96,33 @@ export default {
     login() {
       let username = this.username_form.toLowerCase();
       let password= this.password_form;
-      axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/${username}`).then((response) => {
-
-        if (response.data.length !== 0) {
-          let hash = response.data[0].user_password;
-          console.log(hash)
-          console.log(password)
-          if (bcrypt.compareSync(password, hash)) {
-            localStorage.setItem('session', JSON.stringify(response.data[0]));
-            this.$router.push('/');
-            window.location.reload();
-          } else {
-            alert('Wrong password');
+      axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/login`, JSON.stringify(
+              {
+                username: username,
+                password: password
+              }), {
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            withCredentials: true
           }
-        } else {
-          alert('Wrong username');
+      ).catch((error) => {
+        // if error: wrong username or password
+        if (error.response.status === 401) {
+          alert(error.response.data.error);
+          }
+      }).then((response) => {
+        // if no error: login
+        if (response) {
+          localStorage.setItem('session', JSON.stringify({
+            user_id: response.data.user_id,
+            user_username: response.data.user_username,
+            user_pp: response.data.user_pp,
+            user_privilege: response.data.user_privilege
+          }));
+          // refresh the page
+          window.location.reload();
         }
-      }).catch((error) => {
-        console.log(error);
       });
     },
     switchForm() {
@@ -123,34 +131,31 @@ export default {
     register() {
       let username = this.username_form.toLowerCase();
       let password = this.password_form;
-      let hashedPassword = bcrypt.hashSync(password, salt);
       let avatar = this.pp_selected;
-      console.log(avatar)
       if(avatar){
         axios.post(`${process.env.VUE_APP_SERVER_API_URL}/users/create`, JSON.stringify(
                 {
                   username: username,
-                  password: hashedPassword,
-                  user_pp: avatar,
-                  privilege: 0
+                  password: password,
+                  user_pp: avatar
                 }), {
               headers: {
                 'Content-Type': 'application/json'
-              }
+              },
+              withCredentials: true
             }
         ).then((response) => {
           this.loginForm = true;
           localStorage.setItem('session', JSON.stringify({
             user_id: response.data.insertId,
             user_username: username,
-            user_password: hashedPassword,
             user_pp: avatar,
             user_privilege: 0
           }));
           this.$router.push('/');
           window.location.reload();
         }).catch((error) => {
-          console.log(error);
+          alert(error.response.data.error)
         });
       }else{
         alert("Please select an avatar")

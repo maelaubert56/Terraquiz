@@ -26,6 +26,7 @@ export default {
 <style scoped>
 
 .Category{
+  width:100%;
   padding: 20px 25px;
 
   border-radius: 30px;
@@ -37,6 +38,13 @@ export default {
   justify-content: space-between;
   align-items: center;
   gap: 20px;
+  transition: all 0.2s ease-in-out;
+  cursor:pointer;
+}
+
+.Category:hover{
+  transform: scale(1.01);
+  transition: all 0.3s ease-in-out;
 }
 
 img{
@@ -88,6 +96,28 @@ h3{
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+}
+
+@media (max-width: 768px) {
+  .Category{
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding-bottom: 30px;
+  }
+
+  .Category>img {
+    display: none;
+  }
+
+  #Progress{
+    width: 100%;
+  }
+
+  .load-bar-back{
+    width: 80%;
+  }
 }
 
 </style>
