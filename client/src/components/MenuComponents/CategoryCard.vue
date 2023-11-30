@@ -3,14 +3,13 @@
     <h3>{{ category }}</h3>
     <div id="Progress">
       <div class="load-bar-back">
-        <div class="load-bar" :style="{width: score + '%'}">
-          <h3 class="score">{{ score }}%</h3>
+        <div class="load-bar" :style="{ width: displayedScore + '%' }">
+          <h3 class="score">{{ displayedScore }}%</h3>
         </div>
       </div>
     </div>
     <img :src="require(`@/assets/categories_images/${image}.png`)" alt="category image" />
   </div>
-
 </template>
 
 <script>
@@ -21,7 +20,40 @@ export default {
     image: String,
     score: Number,
   },
-}
+  data() {
+    return {
+      loadBarWidth: 0,
+      displayedScore: 0,
+    };
+  },
+  mounted() {
+    this.animateScore();
+  },
+  methods: {
+    easeInOut(t) {
+      return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+    },
+    animateScore() {
+      const duration = 1000; // Set the animation duration in milliseconds
+      const startTime = performance.now();
+
+      const animate = (currentTime) => {
+        const elapsedTime = currentTime - startTime;
+        if (elapsedTime < duration) {
+          const progress = this.easeInOut(elapsedTime / duration);
+          this.displayedScore = Math.floor(progress * this.score);
+          this.loadBarWidth = progress * 100;
+          requestAnimationFrame(animate);
+        } else {
+          this.displayedScore = this.score;
+          this.loadBarWidth = 100;
+        }
+      };
+
+      requestAnimationFrame(animate);
+    }
+  },
+};
 </script>
 
 <style scoped>
@@ -84,7 +116,6 @@ h3{
   height: 20px;
   border-radius: 10px;
   background: #46CDFF;
-  transition: width 0.5s ease-in-out;
 }
 
 .score{
@@ -108,6 +139,10 @@ h3{
     padding-bottom: 30px;
   }
 
+  h3{
+    font-size: 24px;
+  }
+
   .Category>img {
     display: none;
   }
@@ -118,6 +153,7 @@ h3{
 
   .load-bar-back{
     width: 80%;
+    height:16px;
   }
 }
 

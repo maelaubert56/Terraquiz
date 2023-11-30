@@ -27,8 +27,9 @@
       </div>
     </div>
 
-    <button :class="'answered'+answered" class="next_question" @click="nextQuestion()">{{this.vue===this.vueNb ? 'See results' : 'Next question'}}</button>
-
+    <div class="next_question_container">
+      <button :class="'answered'+answered" class="next_question" @click="nextQuestion()">{{this.vue===this.vueNb ? 'See results' : 'Next question'}}</button>
+    </div>
     <div class="particles particles_stars_hidden">
       <img src="@/assets/star.svg" alt="star" class="star1 star">
       <img src="@/assets/star.svg" alt="star" class="star2 star">
@@ -133,7 +134,19 @@ export default {
                 let img = new Image();
                 img.src = require(`@/assets/quiz/flags/${image}.svg`);
               })
-
+              // wait for the dom to be loaded
+              this.$nextTick(() => {
+                let divs2 = document.getElementsByClassName("answer")
+                let i = 0;
+                Array.from(divs2).forEach(element => {
+                  console.log(this.answers[i] + this.answers[i].length)
+                  element.classList.remove("smaller_font");
+                  if (this.answers[i].length > 10) {
+                    element.classList.add("smaller_font");
+                  }
+                  i++;
+                });
+              })
             }
           })
           .catch((error) => {
@@ -164,6 +177,19 @@ export default {
           this.answers.sort(() => Math.random() - 0.5);
           this.image = question.question_CTF_flag;
           this.answered = false;
+          // wait for the dom to be updated
+          this.$nextTick(() => {
+            let divs2 = document.getElementsByClassName("answer")
+            let i = 0;
+            Array.from(divs2).forEach(element => {
+              console.log(this.answers[i] + this.answers[i].length)
+              element.classList.remove("smaller_font");
+              if (this.answers[i].length > 10) {
+                element.classList.add("smaller_font");
+              }
+              i++;
+            });
+          })
         }
       }
       else{
@@ -233,6 +259,10 @@ p{
   transition: 0.1s;
 }
 
+.smaller_font{
+  font-size: 17px !important;
+}
+
 .question_answers button:hover{
   transform: translateX(5px);
   transition: 0.1s;
@@ -279,7 +309,15 @@ p{
 
 
 
+.next_question_container{
+  height:100%;
+  width:100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
 
+}
 
 .next_question{
   width: fit-content;
@@ -389,22 +427,56 @@ button{
 
 
   .QuizQuestion {
+    height:fit-content;
     flex-direction: column;
-    gap: 30px;
+    justify-content: flex-start;
+    gap: 20px;
   }
 
   .question {
-    width: 70%;
+    width: 50%;
+    height: 100%;
     object-fit:contain;
   }
 
+  .question>img {
+    height:100%
+  }
+
   .question_answers {
+    flex-direction: row;
+    flex-wrap: wrap;
     width: 100%;
+    height: fit-content;
+    gap:10px;
   }
 
   .question_answers button {
-    width: 100%;
+    width: 48%;
+    height: fit-content;
   }
+
+
+
+  p{
+    font-size: 16px;
+  }
+
+  .next_question{
+    width: 100%;
+    height: fit-content;
+  }
+
+  .star2, .wrong_chat2{
+    left: 80%;
+  }
+
+  .star4, .wrong_chat4{
+    left: 90%;
+  }
+
+
+
 }
 
 
