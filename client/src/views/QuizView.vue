@@ -169,10 +169,12 @@ export default {
   animation: move 0.5s ease-in-out infinite alternate;
 }
 @media (max-width: 768px) {
-  .QuizArea{
+  .QuizArea {
     width: 80vw;
     padding: 20px 20px;
-    margin: 20px 0;
+    margin: 0px 0;
+    justify-content: flex-start;
+    gap:10px;
   }
 }
 </style>
