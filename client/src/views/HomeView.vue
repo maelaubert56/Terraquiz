@@ -59,6 +59,7 @@ export default {
 
     axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/checkConnection`, { withCredentials: true })
       .then((response) => {
+        console.log(response)
         if (response.status === 200) {
           // change localstorage
           localStorage.setItem("session", JSON.stringify(response.data));
