@@ -1,11 +1,11 @@
 <template>
-  <div v-if="loading===true" class="loading">
+  <div v-if="loading===0" class="loading">
     <div class="loading__container">
       <h2>Loading...</h2>
     </div>
   </div>
   <ChooseAvatar v-if="!isConnected && isModalVisible" :pp_selected="parseInt(pp_selected)" @chooseAvatarEvent="handleChooseAvatar" @closeModalEvent="handleCloseModal"/>
-  <div v-if="loading===false" id="HomePage">
+  <div v-if="loading===2" id="HomePage">
     <img src="../assets/background_mobile.png" alt="Plane" class="plane_mobile">
     <img src="../assets/background_desktop.png" alt="Plane" class="plane_desktop">
     <div>
@@ -30,7 +30,7 @@ export default {
       pp_selected: null,
       isConnected: false,
       isAdmin: false,
-      loading: true
+      loading: 0
     };
   },
   components: {
@@ -47,12 +47,12 @@ export default {
       image.onload = ()=>{
         loaded++;
         if(loaded === (imgsrc.length)){
-          this.loading = false;
+          this.loading ++;
         }
       }
     })
-  },
-  created() {
+
+    console.log("temporaire")
     // use the route users/checkConnection to check if the user is connected
     // if the response is 401, the user is not connected so this.isUserConnected = false
     // if the response is 200, the user is connected so this.isUserConnected = true, then we check if the user is admin in the response
@@ -66,13 +66,18 @@ export default {
           this.isConnected = true;
           this.isAdmin = response.data.user_privilege > 0;
           this.pp_selected = response.data.user_pp;
+          this.loading ++;
+          console.log(this.loading)
         }
       })
       .catch((error) => {
         if (error.response.status === 401) {
           this.isConnected = false;
+          this.isAdmin = false;
+          this.loading ++;
         }
       });
+    console.log("temporair2e")
   },
   methods: {
     handleChooseAvatar(avatarId) {
