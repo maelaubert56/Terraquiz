@@ -137,6 +137,7 @@ export default {
   padding-bottom: 50px;
   box-sizing: border-box;
   gap:50px;
+  overflow-y: scroll;
 }
 
 .title{
@@ -303,6 +304,53 @@ img {
   background-color: white;
   color: #48466D;
   transition: 0.3s;
+}
+
+
+@media (max-width: 768px) {
+  .container {
+    flex-direction: column;
+    gap: 50px;
+  }
+
+  .container>div{
+    width:100%;
+  }
+
+  .subcontainer {
+    gap: 50px;
+  }
+
+  .container_item {
+    gap: 10px;
+  }
+
+  .container_item h3 {
+    font-size: 20px;
+  }
+
+  .container_item input {
+    font-size: 15px;
+    height: 40px;
+    letter-spacing: 3px;
+  }
+
+  .container_item button {
+    font-size: 15px;
+    height: 40px;
+    letter-spacing: 3px;
+  }
+
+  .modal_confirm_container h2 {
+    font-size: 20px;
+    letter-spacing: 3px;
+  }
+
+  .modal_confirm_container_buttons button {
+    font-size: 15px;
+    letter-spacing: 3px;
+    padding: 5px;
+  }
 }
 
 </style>
