@@ -398,7 +398,61 @@ button{
   transform: translateY(-100%) scaleX(1);
 }
 
+@media (max-width: 768px) {
 
+
+.QuizQuestion {
+  height:fit-content;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+}
+
+.question {
+  width: 50%;
+  height: 100%;
+  object-fit:contain;
+}
+
+.question>img {
+  height:100%
+}
+
+.question_answers {
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  gap:10px;
+}
+
+.question_answers button {
+  width: 48%;
+  height: fit-content;
+}
+
+
+
+p{
+  font-size: 16px;
+}
+
+.next_question{
+  width: 100%;
+  height: fit-content;
+}
+
+.star2, .wrong_chat2{
+  left: 80%;
+}
+
+.star4, .wrong_chat4{
+  left: 90%;
+}
+
+
+
+}
 
 
 </style>

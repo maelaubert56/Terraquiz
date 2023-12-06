@@ -123,5 +123,11 @@ p{
   font-size: 20px;
 }
 
+@media (max-width: 768px) {
+  .ResultsArea{
+    padding: 20px 0;
+    margin:0;
+  }
+}
 
 </style>
