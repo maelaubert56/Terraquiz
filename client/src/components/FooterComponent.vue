@@ -1,6 +1,7 @@
 <template>
   <footer>
     <img src="@/assets/gear.svg" alt="settings" v-if="isConnected" @click="redirect(0)">
+    <img src="@/assets/star_icon.svg" alt="leaderboard" v-if="isConnected" @click="redirect(3)">
     <img src="@/assets/github.png" alt="github" @click="redirect(1)">
     <img src="@/assets/log-out.svg" alt="log-out" v-if="isConnected" @click="logout()">
     <img src="@/assets/tool_picto.svg" alt="admin_panel" v-if="isConnected && isAdmin" @click="redirect(2)">
@@ -27,6 +28,9 @@ export default {
           break;
         case 2:
           this.$router.push('/adminpanel');
+          break;
+        case 3:
+          this.$router.push('/scoreboard');
           break;
         default:
           break;

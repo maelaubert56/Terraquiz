@@ -29,6 +29,10 @@ const routes = [
     path:'/adminpanel',
     name:'adminpanel',
     component:() => import('../views/AdminPanelView.vue')
+  },{
+    path:'/scoreboard',
+    name:'scoreboard',
+    component:() => import('../views/ScoreBoardView.vue')
   },
   {
     path: '/:pathMatch(.*)*',

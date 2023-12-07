@@ -40,6 +40,14 @@ router.get("/", async (req, res) => {
     return res.status(200).json(response[0])
 })
 
+router.get("/scoreboard", async (req, res) => {
+    // get the 10 best users in terms of score
+    // the progress of each user for each quiz is stored in the progress table, do the average of it to get the score
+    const response = await db.promise().query('SELECT users.user_id, user_username, user_pp, AVG(progress_value) as score FROM progress JOIN users ON progress.user_id = users.user_id GROUP BY user_username ORDER BY score DESC LIMIT 10');
+    console.log(response[0])
+    return res.status(200).json(response[0])
+});
+
 router.get("/get/:username", async (req, res) => {
     const {username} = req.params
     db.query('SELECT * FROM users WHERE user_username = ?', [username], (err, result) => {

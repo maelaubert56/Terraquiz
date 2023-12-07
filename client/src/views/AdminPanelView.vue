@@ -92,7 +92,7 @@ export default {
     )
     .catch((error) => {
         if (error.response.status === 401) {
-          this.$router.push('/login');
+          this.$router.push('/');
         }
       }
     );
@@ -377,6 +377,7 @@ h1, h2, h3, a, p, span{
   opacity:1 !important;
   transition:0.2s;
 }
+
 .user_manage_list .user>img{
   width:50px;
   height:50px;
@@ -389,6 +390,10 @@ h1, h2, h3, a, p, span{
 
 .user_manage_list .user>span{
   height: 30px;
+}
+
+
+@media (max-width: 768px) {
 }
 
 </style>
