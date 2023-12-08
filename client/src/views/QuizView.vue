@@ -66,9 +66,7 @@ export default {
     updateProgress(user_id, quiz_id, progress_value){
       axios.post(`${process.env.VUE_APP_SERVER_API_URL}/quiz/progress/${quiz_id}/${user_id}`, {
         progress_value: progress_value
-      }).then((response) => {
-        console.log(response.data);
-      });
+      })
     },
     quizFinished(score){
       this.vue=-1;
@@ -78,7 +76,6 @@ export default {
       let quiz_id = this.quiz_id;
       // if progress is better than current progress, update it
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/progress/${quiz_id}/${user_id}`).then((response) => {
-        console.log(response.data);
         if (response.data.progress_value < this.percentage(this.score)){
           this.updateProgress(user_id, quiz_id, this.percentage(this.score));
         }
@@ -96,8 +93,6 @@ export default {
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/${this.quiz_id}`).then((response) => {
         this.quiz_name = response.data.quiz_name;
         this.quiz_image = '/assets/quiz_images/' + response.data.quiz_image + '.png';
-        console.log(this.quiz_name);
-        console.log(this.quiz_image)
       });
     }
   }
@@ -172,7 +167,7 @@ export default {
   .QuizArea {
     width: 80vw;
     padding: 20px 20px;
-    margin: 0px 0;
+    margin: 0;
     justify-content: flex-start;
     gap:10px;
   }

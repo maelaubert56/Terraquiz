@@ -102,7 +102,7 @@ h1, h2, h3, a, p, span{
   width:40%;
   max-height: 70vh;
   border-radius: 20px;
-  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.75);
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.75);
   margin: 30px;
   box-sizing: border-box;
   display: flex;

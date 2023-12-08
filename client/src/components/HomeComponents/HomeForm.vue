@@ -63,7 +63,6 @@ export default {
     pp_selected: Number
   },
   beforeMount() {
-    console.log("connected: " + this.isConnected)
     if (this.isConnected) {
       //get the user id in the session
       this.session = JSON.parse(localStorage.getItem("session"));

@@ -87,27 +87,22 @@ export default {
             element.classList.add("good_answer");
             if (element.id === answer) {
               document.getElementsByClassName("particles_stars_hidden")[0].classList.remove("particles_stars_hidden");
-              console.log("good answer, score +1 for the index " + (this.vue - 1) + " of the score array")
               this.score[this.vue - 1] = 1;
             }
           } else if (element.id === answer && element.id !== this.good_answer) {
             element.classList.add("bad_answer");
             document.getElementsByClassName("particles_wrong_chat_hidden")[0].classList.remove("particles_wrong_chat_hidden");
             this.score[this.vue-1] = 0;
-            console.log("bad answer, score +0 for the index "+(this.vue-1)+" of the score array")
           } else {
             element.classList.add("not_answered");
           }
         });
-        console.log(this.score)
       } else {
         console.log("already answered")
       }
     },
     setupQuiz() {
-      console.log("executed")
       let cat_id = this.$route.query.cat;
-      console.log(cat_id)
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${cat_id}/${this.quiz_id}`)
           .then((response) => {
             if(response.data.length === 0){
@@ -116,7 +111,6 @@ export default {
               // store it in local storage
               localStorage.setItem("quiz", JSON.stringify(response.data));
               this.vueNb = JSON.parse(localStorage.getItem("quiz")).length
-              console.log(this.quiz_type)
               let question = JSON.parse(localStorage.getItem("quiz"))[0]
               this.vue = 1;
               this.quiz_instruction = "From which country come this sentence ?";
@@ -127,13 +121,11 @@ export default {
               this.sentence = question.question_WDYS_sentence;
               this.answered = false;
               this.lang_code = question.question_WDYS_lang_code;
-              console.log("resquest done, values changed")
             }
           })
           .catch((error) => {
             console.log(error);
           });
-      console.log(this.quiz_instruction)
     },
     nextQuestion() {
       if (this.vue < this.vueNb) {
@@ -158,8 +150,6 @@ export default {
         this.sentence = question.question_WDYS_sentence;
         this.answered = false;
         this.lang_code = question.question_WDYS_lang_code;
-        console.log("lang : ",this.lang_code)
-        console.log("next question")
       }
       else{
         this.$emit('quizFinished', this.score);
@@ -171,7 +161,6 @@ export default {
     },
     speak(text, lang) {
       const msg = new SpeechSynthesisUtterance();
-      console.log(text)
       msg.text = text
       msg.volume = 1.0; // speech volume (default: 1.0)
       msg.pitch = 1.0; // speech pitch (default: 1.0)
@@ -243,7 +232,7 @@ p{
   border: none;
   border-radius: 30px;
   background: #46CDCF;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.25);
   transition: 0.1s;
 }
 
@@ -304,7 +293,7 @@ p{
   border: none;
   border-radius: 30px;
   background: #ABEDD8;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.25);
   transition: 0.1s;
 }
 

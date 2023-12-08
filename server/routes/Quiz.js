@@ -46,7 +46,6 @@ router.post("/add", async (req, res) => {
 
 router.get("/questions/:cat_id/:id_quiz", async (req, res) => {
     const {cat_id, id_quiz} = req.params
-    console.log(cat_id, id_quiz)
     let catnameResponse  = await connection.promise().query('SELECT category_name FROM category WHERE category_id = ?', [cat_id]);
     let catname = catnameResponse [0][0].category_name
     if(catname === "Capture The Flag"){catname="question_ctf"}

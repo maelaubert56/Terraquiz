@@ -38,7 +38,7 @@ h1 {
 .logo_right{
   width: 200px;
   height: 200px;
-  margin-left: 0px;
+  margin-left: 0;
 }
 
 </style>

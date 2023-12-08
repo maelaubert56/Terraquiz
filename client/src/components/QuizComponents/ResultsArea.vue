@@ -39,7 +39,6 @@ export default {
     msg(){
       let percentage = this.percentage()
       let message = (percentage === 100 ? "Perfect!" : percentage >= 80 ? "Great!" : percentage >= 60 ? "Good!" : percentage >= 40 ? "Not bad!" : percentage >= 20 ? "You can do better!" : "Try again!")
-      console.log(message)
       return message
     }
   }
@@ -107,7 +106,7 @@ export default {
   border: none;
   border-radius: 30px;
   background: #ABEDD8;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
 button{

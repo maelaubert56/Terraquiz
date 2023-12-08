@@ -86,27 +86,22 @@ export default {
             element.classList.add("good_answer");
             if (element.id === answer) {
               document.getElementsByClassName("particles_stars_hidden")[0].classList.remove("particles_stars_hidden");
-              console.log("good answer, score +1 for the index " + (this.vue - 1) + " of the score array")
               this.score[this.vue - 1] = 1;
             }
           } else if (element.id === answer && element.id !== this.good_answer) {
             element.classList.add("bad_answer");
             document.getElementsByClassName("particles_wrong_chat_hidden")[0].classList.remove("particles_wrong_chat_hidden");
             this.score[this.vue-1] = 0;
-            console.log("bad answer, score +0 for the index "+(this.vue-1)+" of the score array")
           } else {
             element.classList.add("not_answered");
           }
         });
-        console.log(this.score)
       } else {
         console.log("already answered")
       }
     },
     setupQuiz() {
-      console.log("executed")
       let cat_id = this.$route.query.cat;
-      console.log(cat_id)
       axios.get(`${process.env.VUE_APP_SERVER_API_URL}/quiz/questions/${cat_id}/${this.quiz_id}`)
           .then((response) => {
             if(response.data.length === 0){
@@ -115,7 +110,6 @@ export default {
               // store it in local storage
               localStorage.setItem("quiz", JSON.stringify(response.data));
               this.vueNb = JSON.parse(localStorage.getItem("quiz")).length
-              console.log(this.quiz_type)
               let question = JSON.parse(localStorage.getItem("quiz"))[0]
               this.vue = 1;
               this.quiz_instruction = "To which country belongs this flag ?";
@@ -125,7 +119,6 @@ export default {
               this.answers.sort(() => Math.random() - 0.5);
               this.image = question.question_CTF_flag;
               this.answered = false;
-              console.log("resquest done, values changed")
               // prerequest all the images in the quiz
               let images = JSON.parse(localStorage.getItem("quiz")).map((question) => {
                 return question.question_CTF_flag
@@ -139,7 +132,6 @@ export default {
                 let divs2 = document.getElementsByClassName("answer")
                 let i = 0;
                 Array.from(divs2).forEach(element => {
-                  console.log(this.answers[i] + this.answers[i].length)
                   element.classList.remove("smaller_font");
                   if (this.answers[i].length > 10) {
                     element.classList.add("smaller_font");
@@ -152,7 +144,6 @@ export default {
           .catch((error) => {
             console.log(error);
           });
-      console.log(this.quiz_instruction)
     },
     nextQuestion() {
       if (this.vue < this.vueNb) {
@@ -182,7 +173,6 @@ export default {
             let divs2 = document.getElementsByClassName("answer")
             let i = 0;
             Array.from(divs2).forEach(element => {
-              console.log(this.answers[i] + this.answers[i].length)
               element.classList.remove("smaller_font");
               if (this.answers[i].length > 10) {
                 element.classList.add("smaller_font");
@@ -255,7 +245,7 @@ p{
   border: none;
   border-radius: 30px;
   background: #46CDCF;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.25);
   transition: 0.1s;
 }
 
@@ -328,7 +318,7 @@ p{
   border: none;
   border-radius: 30px;
   background: #ABEDD8;
-  box-shadow: 0px 4px 5px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.25);
   transition: 0.1s;
 }
 

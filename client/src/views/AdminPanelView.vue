@@ -456,12 +456,12 @@ h1, h2, h3, a, p, span{
   }
 
   .user_manage_list>.users_list::-webkit-scrollbar {
-    width: 0px;
+    width: 0;
     background: transparent;
   }
 
   .user_manage_list>.users_list::-webkit-scrollbar-thumb {
-    width: 0px;
+    width: 0;
     background: transparent;
   }
 

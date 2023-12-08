@@ -52,23 +52,19 @@ export default {
       }
     })
 
-    console.log("temporaire")
     // use the route users/checkConnection to check if the user is connected
     // if the response is 401, the user is not connected so this.isUserConnected = false
     // if the response is 200, the user is connected so this.isUserConnected = true, then we check if the user is admin in the response
 
     axios.get(`${process.env.VUE_APP_SERVER_API_URL}/users/checkConnection`, { withCredentials: true })
       .then((response) => {
-        console.log(response)
         if (response.status === 200) {
           // change localstorage
           localStorage.setItem("session", JSON.stringify(response.data));
-          console.log("response.data: " + JSON.stringify(response.data));
           this.isConnected = true;
           this.isAdmin = response.data.user_privilege > 0;
           this.pp_selected = response.data.user_pp;
           this.loading ++;
-          console.log(this.loading)
         }
       })
       .catch((error) => {
@@ -78,7 +74,6 @@ export default {
           this.loading ++;
         }
       });
-    console.log("temporair2e")
   },
   methods: {
     handleChooseAvatar(avatarId) {
@@ -89,7 +84,6 @@ export default {
     },
     handleOpenModal() {
       this.isModalVisible = true;
-      console.log('open')
     }
   }
 };

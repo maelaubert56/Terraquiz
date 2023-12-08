@@ -64,7 +64,7 @@ export default {
 
   border-radius: 30px;
   background: #5E5C89;
-  box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.25);
 
   display: flex;
   flex-direction: row;
