@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.0.4deb2+deb11u1
 -- https://www.phpmyadmin.net/
 --
--- Hôte : 127.0.0.1:3306
--- Généré le : mar. 21 nov. 2023 à 20:33
--- Version du serveur : 8.0.31
--- Version de PHP : 8.0.26
+-- Hôte : localhost:3306
+-- Généré le : ven. 08 déc. 2023 à 11:38
+-- Version du serveur :  8.0.35
+-- Version de PHP : 7.4.33
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -27,13 +27,11 @@ SET time_zone = "+00:00";
 -- Structure de la table `category`
 --
 
-DROP TABLE IF EXISTS `category`;
-CREATE TABLE IF NOT EXISTS `category` (
-  `category_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `category` (
+  `category_id` int NOT NULL,
   `category_name` varchar(50) NOT NULL,
-  `category_image` varchar(50) NOT NULL,
-  PRIMARY KEY (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `category_image` varchar(50) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `category`
@@ -50,13 +48,10 @@ INSERT INTO `category` (`category_id`, `category_name`, `category_image`) VALUES
 -- Structure de la table `progress`
 --
 
-DROP TABLE IF EXISTS `progress`;
-CREATE TABLE IF NOT EXISTS `progress` (
+CREATE TABLE `progress` (
   `user_id` int NOT NULL,
   `quiz_id` int NOT NULL,
-  `progress_value` decimal(4,0) NOT NULL,
-  PRIMARY KEY (`user_id`,`quiz_id`),
-  KEY `quiz_id` (`quiz_id`)
+  `progress_value` decimal(4,0) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
@@ -64,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `progress` (
 --
 
 INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
-(26, 3, '0'),
-(26, 2, '0'),
-(26, 1, '21'),
+(34, 32, '0'),
+(34, 33, '0'),
+(34, 34, '0'),
 (29, 6, '69'),
 (29, 7, '40'),
 (27, 8, '0'),
@@ -76,34 +71,34 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (27, 3, '0'),
 (27, 2, '0'),
 (27, 1, '0'),
-(26, 6, '0'),
-(26, 5, '0'),
-(26, 4, '0'),
+(34, 29, '0'),
+(34, 30, '0'),
+(34, 31, '0'),
 (29, 5, '25'),
 (29, 4, '47'),
 (29, 3, '13'),
-(26, 7, '0'),
+(34, 28, '0'),
 (29, 2, '80'),
 (27, 7, '0'),
-(26, 8, '0'),
+(34, 27, '0'),
 (29, 8, '0'),
 (29, 1, '93'),
 (27, 9, '0'),
-(26, 9, '0'),
+(34, 26, '0'),
 (29, 9, '36'),
-(26, 10, '0'),
+(34, 25, '0'),
 (29, 10, '69'),
 (27, 10, '0'),
-(26, 11, '0'),
+(34, 24, '0'),
 (29, 11, '19'),
 (27, 11, '0'),
-(26, 12, '0'),
+(34, 23, '0'),
 (29, 12, '24'),
 (27, 12, '0'),
-(26, 13, '0'),
+(34, 22, '0'),
 (29, 13, '38'),
 (27, 13, '0'),
-(26, 14, '0'),
+(34, 21, '0'),
 (29, 14, '13'),
 (27, 14, '0'),
 (30, 1, '0'),
@@ -121,22 +116,22 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (30, 13, '0'),
 (30, 14, '0'),
 (27, 15, '0'),
-(26, 15, '13'),
+(34, 20, '0'),
 (30, 15, '0'),
 (27, 16, '0'),
-(26, 16, '19'),
+(34, 19, '0'),
 (30, 16, '0'),
 (27, 17, '0'),
-(26, 17, '13'),
+(34, 18, '0'),
 (30, 17, '0'),
 (27, 18, '0'),
-(26, 18, '45'),
+(34, 17, '0'),
 (30, 18, '0'),
 (27, 19, '0'),
-(26, 19, '42'),
+(34, 16, '0'),
 (30, 19, '0'),
 (27, 20, '0'),
-(26, 20, '17'),
+(34, 15, '0'),
 (30, 20, '0'),
 (31, 1, '0'),
 (31, 2, '0'),
@@ -179,75 +174,279 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 (32, 19, '0'),
 (32, 20, '0'),
 (27, 21, '0'),
-(26, 21, '100'),
+(34, 14, '0'),
 (30, 21, '0'),
 (31, 21, '0'),
 (32, 21, '0'),
 (27, 22, '0'),
-(26, 22, '40'),
+(34, 13, '0'),
 (30, 22, '0'),
 (31, 22, '0'),
 (32, 22, '0'),
 (27, 23, '0'),
-(26, 23, '27'),
+(34, 12, '0'),
 (30, 23, '0'),
 (31, 23, '0'),
 (32, 23, '0'),
 (27, 24, '0'),
-(26, 24, '21'),
+(34, 11, '0'),
 (30, 24, '0'),
 (31, 24, '0'),
 (32, 24, '0'),
 (27, 25, '0'),
-(26, 25, '42'),
+(34, 10, '0'),
 (30, 25, '0'),
 (31, 25, '0'),
 (32, 25, '0'),
 (27, 26, '0'),
-(26, 26, '29'),
+(34, 9, '0'),
 (30, 26, '0'),
 (31, 26, '0'),
 (32, 26, '0'),
 (27, 27, '0'),
-(26, 27, '17'),
+(34, 8, '0'),
 (30, 27, '0'),
 (31, 27, '0'),
 (32, 27, '0'),
 (27, 28, '0'),
-(26, 28, '43'),
+(34, 7, '0'),
 (30, 28, '0'),
 (31, 28, '0'),
 (32, 28, '0'),
 (27, 29, '0'),
-(26, 29, '21'),
+(34, 6, '0'),
 (30, 29, '0'),
 (31, 29, '0'),
 (32, 29, '0'),
 (27, 30, '0'),
-(26, 30, '25'),
+(34, 5, '0'),
 (30, 30, '0'),
 (31, 30, '0'),
 (32, 30, '0'),
 (27, 31, '0'),
-(26, 31, '33'),
+(34, 4, '0'),
 (30, 31, '0'),
 (31, 31, '0'),
 (32, 31, '0'),
 (27, 32, '0'),
-(26, 32, '19'),
+(34, 3, '0'),
 (30, 32, '0'),
 (31, 32, '0'),
 (32, 32, '0'),
 (27, 33, '0'),
-(26, 33, '40'),
+(34, 2, '0'),
 (30, 33, '0'),
 (31, 33, '0'),
 (32, 33, '0'),
 (27, 34, '0'),
-(26, 34, '42'),
+(34, 1, '0'),
 (30, 34, '0'),
 (31, 34, '0'),
-(32, 34, '0');
+(32, 34, '0'),
+(46, 1, '0'),
+(46, 2, '0'),
+(46, 3, '0'),
+(46, 4, '0'),
+(46, 5, '0'),
+(46, 6, '0'),
+(46, 7, '0'),
+(46, 8, '0'),
+(46, 9, '0'),
+(46, 10, '0'),
+(46, 11, '0'),
+(46, 12, '0'),
+(46, 13, '0'),
+(46, 14, '0'),
+(46, 15, '0'),
+(46, 16, '0'),
+(46, 17, '0'),
+(46, 18, '0'),
+(46, 19, '0'),
+(46, 20, '0'),
+(46, 21, '0'),
+(46, 22, '0'),
+(46, 23, '0'),
+(46, 24, '0'),
+(46, 25, '0'),
+(46, 26, '0'),
+(46, 27, '0'),
+(46, 28, '0'),
+(46, 29, '0'),
+(46, 30, '0'),
+(46, 31, '0'),
+(46, 32, '0'),
+(46, 33, '0'),
+(46, 34, '0'),
+(47, 1, '0'),
+(47, 2, '0'),
+(47, 3, '0'),
+(47, 4, '0'),
+(47, 5, '0'),
+(47, 6, '0'),
+(47, 7, '0'),
+(47, 8, '0'),
+(47, 9, '0'),
+(47, 10, '0'),
+(47, 11, '0'),
+(47, 12, '0'),
+(47, 13, '0'),
+(47, 14, '0'),
+(47, 15, '0'),
+(47, 16, '0'),
+(47, 17, '0'),
+(47, 18, '0'),
+(47, 19, '0'),
+(47, 20, '0'),
+(47, 21, '0'),
+(47, 22, '0'),
+(47, 23, '0'),
+(47, 24, '0'),
+(47, 25, '0'),
+(47, 26, '0'),
+(47, 27, '0'),
+(47, 28, '0'),
+(47, 29, '0'),
+(47, 30, '0'),
+(47, 31, '0'),
+(47, 32, '0'),
+(47, 33, '0'),
+(47, 34, '0'),
+(48, 1, '0'),
+(48, 2, '0'),
+(48, 3, '0'),
+(48, 4, '0'),
+(48, 5, '0'),
+(48, 6, '0'),
+(48, 7, '0'),
+(48, 8, '0'),
+(48, 9, '0'),
+(48, 10, '0'),
+(48, 11, '0'),
+(48, 12, '0'),
+(48, 13, '0'),
+(48, 14, '0'),
+(48, 15, '0'),
+(48, 16, '0'),
+(48, 17, '0'),
+(48, 18, '0'),
+(48, 19, '0'),
+(48, 20, '0'),
+(48, 21, '0'),
+(48, 22, '60'),
+(48, 23, '0'),
+(48, 24, '0'),
+(48, 25, '0'),
+(48, 26, '0'),
+(48, 27, '0'),
+(48, 28, '0'),
+(48, 29, '0'),
+(48, 30, '0'),
+(48, 31, '0'),
+(48, 32, '0'),
+(48, 33, '0'),
+(48, 34, '0'),
+(49, 1, '100'),
+(49, 2, '87'),
+(49, 3, '60'),
+(49, 4, '87'),
+(49, 5, '81'),
+(49, 6, '0'),
+(49, 7, '50'),
+(49, 8, '0'),
+(49, 9, '100'),
+(49, 10, '69'),
+(49, 11, '94'),
+(49, 12, '77'),
+(49, 13, '56'),
+(49, 14, '0'),
+(49, 15, '0'),
+(49, 16, '69'),
+(49, 17, '0'),
+(49, 18, '73'),
+(49, 19, '67'),
+(49, 20, '0'),
+(49, 21, '100'),
+(49, 22, '67'),
+(49, 23, '100'),
+(49, 24, '79'),
+(49, 25, '83'),
+(49, 26, '57'),
+(49, 27, '0'),
+(49, 28, '0'),
+(49, 29, '100'),
+(49, 30, '69'),
+(49, 31, '0'),
+(49, 32, '69'),
+(49, 33, '0'),
+(49, 34, '0'),
+(50, 1, '43'),
+(50, 2, '0'),
+(50, 3, '0'),
+(50, 4, '0'),
+(50, 5, '0'),
+(50, 6, '0'),
+(50, 7, '0'),
+(50, 8, '0'),
+(50, 9, '0'),
+(50, 10, '0'),
+(50, 11, '0'),
+(50, 12, '0'),
+(50, 13, '0'),
+(50, 14, '0'),
+(50, 15, '0'),
+(50, 16, '0'),
+(50, 17, '0'),
+(50, 18, '0'),
+(50, 19, '0'),
+(50, 20, '0'),
+(50, 21, '0'),
+(50, 22, '0'),
+(50, 23, '0'),
+(50, 24, '0'),
+(50, 25, '0'),
+(50, 26, '0'),
+(50, 27, '0'),
+(50, 28, '0'),
+(50, 29, '0'),
+(50, 30, '0'),
+(50, 31, '0'),
+(50, 32, '0'),
+(50, 33, '60'),
+(50, 34, '58'),
+(51, 1, '86'),
+(51, 2, '87'),
+(51, 3, '73'),
+(51, 4, '80'),
+(51, 5, '0'),
+(51, 6, '0'),
+(51, 7, '0'),
+(51, 8, '0'),
+(51, 9, '0'),
+(51, 10, '0'),
+(51, 11, '0'),
+(51, 12, '0'),
+(51, 13, '0'),
+(51, 14, '0'),
+(51, 15, '63'),
+(51, 16, '69'),
+(51, 17, '0'),
+(51, 18, '73'),
+(51, 19, '0'),
+(51, 20, '0'),
+(51, 21, '100'),
+(51, 22, '100'),
+(51, 23, '27'),
+(51, 24, '100'),
+(51, 25, '0'),
+(51, 26, '0'),
+(51, 27, '0'),
+(51, 28, '0'),
+(51, 29, '0'),
+(51, 30, '63'),
+(51, 31, '100'),
+(51, 32, '0'),
+(51, 33, '0'),
+(51, 34, '0');
 
 -- --------------------------------------------------------
 
@@ -255,18 +454,15 @@ INSERT INTO `progress` (`user_id`, `quiz_id`, `progress_value`) VALUES
 -- Structure de la table `question_ctf`
 --
 
-DROP TABLE IF EXISTS `question_ctf`;
-CREATE TABLE IF NOT EXISTS `question_ctf` (
-  `question_CTF_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `question_ctf` (
+  `question_CTF_id` int NOT NULL,
   `question_CTF_flag` varchar(50) NOT NULL,
   `question_CTF_answer` varchar(50) NOT NULL,
   `question_CTF_bad1` varchar(50) NOT NULL,
   `question_CTF_bad2` varchar(50) NOT NULL,
   `question_CTF_bad3` varchar(50) NOT NULL,
-  `quiz_id` int NOT NULL,
-  PRIMARY KEY (`question_CTF_id`),
-  KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=252 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quiz_id` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `question_ctf`
@@ -433,12 +629,6 @@ INSERT INTO `question_ctf` (`question_CTF_id`, `question_CTF_flag`, `question_CT
 (196, 'kuwait', 'kuwait', 'uzbekistan', 'palestine', 'uzbekistan', 11),
 (197, 'bangladesh', 'bangladesh', 'pakistan', 'kuwait', 'armenia', 11),
 (198, 'timor-leste', 'timor-leste', 'bhutan', 'palestine', 'mongolia', 11),
-(199, 'morocco', 'morocco', 'tanzania', 'zimbabwe', 'botswana', 12),
-(200, 'south_africa', 'south_africa', 'morocco', 'botswana', 'namibia', 12),
-(201, 'egypt', 'egypt', 'zimbabwe', 'algeria', 'tanzania', 12),
-(202, 'tunisia', 'tunisia', 'egypt', 'namibia', 'south_africa', 12),
-(203, 'algeria', 'algeria', 'botswana', 'nigeria', 'namibia', 12),
-(204, 'zimbabwe', 'zimbabwe', 'morocco', 'tanzania', 'mozambique', 12),
 (205, 'morocco', 'morocco', 'tanzania', 'zimbabwe', 'botswana', 12),
 (206, 'south_africa', 'south_africa', 'morocco', 'botswana', 'namibia', 12),
 (207, 'egypt', 'egypt', 'zimbabwe', 'algeria', 'tanzania', 12),
@@ -493,18 +683,15 @@ INSERT INTO `question_ctf` (`question_CTF_id`, `question_CTF_flag`, `question_CT
 -- Structure de la table `question_ftc`
 --
 
-DROP TABLE IF EXISTS `question_ftc`;
-CREATE TABLE IF NOT EXISTS `question_ftc` (
-  `question_FTC_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `question_ftc` (
+  `question_FTC_id` int NOT NULL,
   `question_FTC_capital` varchar(50) NOT NULL,
   `question_FTC_answer` varchar(50) NOT NULL,
   `question_FTC_bad1` varchar(50) NOT NULL,
   `question_FTC_bad2` varchar(50) NOT NULL,
   `question_FTC_bad3` varchar(50) NOT NULL,
-  `quiz_id` int NOT NULL,
-  PRIMARY KEY (`question_FTC_id`),
-  KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=179 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quiz_id` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `question_ftc`
@@ -696,19 +883,16 @@ INSERT INTO `question_ftc` (`question_FTC_id`, `question_FTC_capital`, `question
 -- Structure de la table `question_wdys`
 --
 
-DROP TABLE IF EXISTS `question_wdys`;
-CREATE TABLE IF NOT EXISTS `question_wdys` (
-  `question_WDYS_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `question_wdys` (
+  `question_WDYS_id` int NOT NULL,
   `question_WDYS_sentence` varchar(50) NOT NULL,
   `question_WDYS_lang_code` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `question_WDYS_answer` varchar(50) NOT NULL,
   `question_WDYS_bad1` varchar(50) NOT NULL,
   `question_WDYS_bad2` varchar(50) NOT NULL,
   `question_WDYS_bad3` varchar(50) NOT NULL,
-  `quiz_id` int NOT NULL,
-  PRIMARY KEY (`question_WDYS_id`),
-  KEY `quiz_id` (`quiz_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=134 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `quiz_id` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `question_wdys`
@@ -797,16 +981,13 @@ INSERT INTO `question_wdys` (`question_WDYS_id`, `question_WDYS_sentence`, `ques
 -- Structure de la table `quiz`
 --
 
-DROP TABLE IF EXISTS `quiz`;
-CREATE TABLE IF NOT EXISTS `quiz` (
-  `quiz_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `quiz` (
+  `quiz_id` int NOT NULL,
   `quiz_name` varchar(50) NOT NULL,
   `quiz_difficulty` tinyint NOT NULL,
   `quiz_image` tinyint NOT NULL,
-  `category_id` int NOT NULL,
-  PRIMARY KEY (`quiz_id`),
-  KEY `category_id` (`category_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=35 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `category_id` int NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `quiz`
@@ -837,7 +1018,7 @@ INSERT INTO `quiz` (`quiz_id`, `quiz_name`, `quiz_difficulty`, `quiz_image`, `ca
 (22, 'Europe - Medium', 1, 3, 3),
 (23, 'Europe - Hard', 2, 3, 3),
 (24, 'America - Easy', 0, 3, 3),
-(25, 'Armerica - Medium', 1, 3, 3),
+(25, 'America - Medium', 1, 3, 3),
 (26, 'America - Hard', 2, 3, 3),
 (27, 'Oceania - Easy', 0, 3, 3),
 (28, 'Oceania - Medium', 1, 3, 3),
@@ -854,16 +1035,13 @@ INSERT INTO `quiz` (`quiz_id`, `quiz_name`, `quiz_difficulty`, `quiz_image`, `ca
 -- Structure de la table `users`
 --
 
-DROP TABLE IF EXISTS `users`;
-CREATE TABLE IF NOT EXISTS `users` (
-  `user_id` int NOT NULL AUTO_INCREMENT,
+CREATE TABLE `users` (
+  `user_id` int NOT NULL,
   `user_username` varchar(50) NOT NULL,
   `user_password` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   `user_pp` tinyint NOT NULL,
-  `user_privilege` tinyint NOT NULL,
-  PRIMARY KEY (`user_id`),
-  UNIQUE KEY `user_username` (`user_username`)
-) ENGINE=MyISAM AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  `user_privilege` tinyint NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Déchargement des données de la table `users`
@@ -875,7 +1053,107 @@ INSERT INTO `users` (`user_id`, `user_username`, `user_password`, `user_pp`, `us
 (30, 'user5', '$2a$10$bPwDRIF7C9XoVC0WdHuVFucSt0F8aaz33MRwzEuQy.RvAK6IC7n9e', 35, 0),
 (29, 'user31', '$2a$10$R.0QK2wxnJKvVPyeIv1NWeixJwVPyp4rdB5DzseL1qfgjvaO4ndiK', 29, 0),
 (27, 'user3', '$2a$10$SQoJtRIfBI2tKyMyUY23UOAJFLVeUiRm4wdUu2MXO8kOkPW84Mev6', 14, 1),
-(26, 'user1', '$2a$10$SC5jsBDkIUnLXeW9k5N4y.y35tWkzCd5cdoZh4aEBT3dHvJjqIgNO', 16, 2);
+(49, 'user', '$2b$10$X9HVl/.OSUiYJXR2owcVye9fTfEOQC072BwvmZSTZgHYqNK7IUSkS', 10, 2),
+(34, 'user9', '$2a$10$GTvG3GUdpRPMJKhbbkIlP.EM1kRpQVXt7K7/sTPghJmn57HIHWozC', 23, 0),
+(36, 'user8812', '$2b$10$Q2Pb6DP6dosRVFDTcZz1V.4EsnkLgEGlE/9ekAT4LEImqduPhFGpC', 23, 0),
+(37, 'user74856&', '$2b$10$tHuoSAzaRLOYl7sgjP4dmOKIsiCJZxKH59/MR.gOmF0R0NouTqU2a', 20, 0),
+(46, 'onlinetest', '$2b$10$7UU/SYWGXcQoCuxcv9fDAOCVF7vhP/w9RSZV36zEt23efey7j0c4O', 11, 0),
+(47, 'user44', '$2b$10$knE9Kgj.P3MPqDPw0CQrP.SMzmrVvhOkK318fGk4eqlFslwcsjQSm', 30, 0),
+(48, 'popo', '$2b$10$a08wH0hJ5JeUOqim2kmCbOll/sH4puwceTkS9FmyZL7XAnkX3snFi', 29, 0),
+(50, 'melestia', '$2b$10$9U94E0Cb5lt8vkmc.jKXJORgT4qdq86dOcfYzN4n9wEObRtJB2vCC', 12, 0),
+(51, 'carlux', '$2b$10$fzfRuYx0BF6uxTVjJTRVo.Q2P7F3JjkMSjTo7kBm5ADF1Bqy7IYge', 14, 1);
+
+--
+-- Index pour les tables déchargées
+--
+
+--
+-- Index pour la table `category`
+--
+ALTER TABLE `category`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Index pour la table `progress`
+--
+ALTER TABLE `progress`
+  ADD PRIMARY KEY (`user_id`,`quiz_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Index pour la table `question_ctf`
+--
+ALTER TABLE `question_ctf`
+  ADD PRIMARY KEY (`question_CTF_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Index pour la table `question_ftc`
+--
+ALTER TABLE `question_ftc`
+  ADD PRIMARY KEY (`question_FTC_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Index pour la table `question_wdys`
+--
+ALTER TABLE `question_wdys`
+  ADD PRIMARY KEY (`question_WDYS_id`),
+  ADD KEY `quiz_id` (`quiz_id`);
+
+--
+-- Index pour la table `quiz`
+--
+ALTER TABLE `quiz`
+  ADD PRIMARY KEY (`quiz_id`),
+  ADD KEY `category_id` (`category_id`);
+
+--
+-- Index pour la table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`user_id`),
+  ADD UNIQUE KEY `user_username` (`user_username`);
+
+--
+-- AUTO_INCREMENT pour les tables déchargées
+--
+
+--
+-- AUTO_INCREMENT pour la table `category`
+--
+ALTER TABLE `category`
+  MODIFY `category_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT pour la table `question_ctf`
+--
+ALTER TABLE `question_ctf`
+  MODIFY `question_CTF_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=252;
+
+--
+-- AUTO_INCREMENT pour la table `question_ftc`
+--
+ALTER TABLE `question_ftc`
+  MODIFY `question_FTC_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=179;
+
+--
+-- AUTO_INCREMENT pour la table `question_wdys`
+--
+ALTER TABLE `question_wdys`
+  MODIFY `question_WDYS_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=134;
+
+--
+-- AUTO_INCREMENT pour la table `quiz`
+--
+ALTER TABLE `quiz`
+  MODIFY `quiz_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+
+--
+-- AUTO_INCREMENT pour la table `users`
+--
+ALTER TABLE `users`
+  MODIFY `user_id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
