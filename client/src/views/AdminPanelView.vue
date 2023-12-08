@@ -394,6 +394,78 @@ h1, h2, h3, a, p, span{
 
 
 @media (max-width: 768px) {
+  .user_manage_container{
+    border-radius:20px;
+    flex-direction: column;
+    justify-content: flex-start;
+    width:90%;
+    height: 100%;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    overflow: visible;
+    padding: 20px 0;
+    margin-bottom: 15px;
+  }
+
+  .user_manage_container>div{
+    margin:0;
+    height: fit-content;
+  }
+
+  .user_manage_container>div>div{
+    box-shadow: none;
+    height: fit-content;
+  }
+
+  .user_manage_list{
+   padding: 20px 0;
+  }
+
+  .user_manage_list>input{
+    width:70%;
+  }
+
+ .user_manage_list>.users_list{
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+   justify-content: flex-start;
+   height:fit-content;
+   gap:10px;
+  }
+
+ .user_manage_list .user{
+   padding: 5px 15px;
+ }
+
+ .user_manage_list .user:first-child{
+   margin-left: 20px;
+  }
+
+  .user_manage_list .user:last-child{
+    margin-right: 20px;
+  }
+
+
+  .user_manage_actions>span>img{
+    width:100px;
+  }
+
+  .user_manage_actions_buttons>button{
+    width:50%;
+  }
+
+  .user_manage_list>.users_list::-webkit-scrollbar {
+    width: 0px;
+    background: transparent;
+  }
+
+  .user_manage_list>.users_list::-webkit-scrollbar-thumb {
+    width: 0px;
+    background: transparent;
+  }
+
+
 }
 
 </style>

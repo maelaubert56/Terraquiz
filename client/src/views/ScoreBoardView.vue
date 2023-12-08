@@ -71,7 +71,6 @@ export default {
 #ScoreBoard{
   width: 100%;
   height: 100vh;
-  //overflow: hidden;
   background-color: #48466D;
   display: flex;
   flex-direction: column;
@@ -203,6 +202,16 @@ h1, h2, h3, a, p, span{
 
 .user_score>span{
   font-size: 1.5rem;
+}
+
+
+@media (max-width: 768px) {
+  .leaderboard  {
+    width: 80%;
+    height:100%;
+    margin-bottom:40px;
+    max-height:70vh;
+  }
 }
 
 </style>
