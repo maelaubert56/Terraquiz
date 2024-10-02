@@ -41,7 +41,7 @@ You will need to create a database using the schema in the ```database``` folder
 cd client && npm install
 cd server && npm install
 ```
-### Compilation
+### Run
 ```
 npm run client && npm run server
 ```
