@@ -9,6 +9,9 @@ RUN npm install
 
 COPY . .
 
+ARG VUE_APP_SERVER_API_URL
+ENV VUE_APP_SERVER_API_URL=$VUE_APP_SERVER_API_URL
+
 RUN npm run build
 
 # Production stage
